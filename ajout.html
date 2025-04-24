@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Nouvel Abonnement</title>
+  <link rel="stylesheet" href="./css/ajout.css">
+</head>
+<body>
+  <div class="container">
+    <h3>Nouvel abonnement</h3>
+
+    <section class="section">
+      <h4>IDENTIFICATION</h4>
+      <label>Numéro <input type="text" value="10"></label>
+      <label>Le <input type="date" value="2022-05-24"></label>
+      <label>Commentaire<br>
+        <textarea rows="2"></textarea>
+      </label>
+    </section>
+
+    <section class="section">
+      <h4>ADHERENT</h4>
+      <label>Numéro <input type="text"></label>
+      <p class="error">Le numéro d'adhérent doit être renseigné.</p>
+    </section>
+
+    <section class="section table-section">
+      <h4>Adhésion</h4>
+      <p><strong>Total : 0,00 €</strong></p>
+      <p class="error">L’abonnement doit comporter au moins une thème</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Libellé</th>
+            <th>Tarif de base</th>
+            <th>Version Papier</th>
+            <th>Montant</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Vide pour l’instant -->
+        </tbody>
+      </table>
+      <div class="table-buttons">
+        <button class="blue">Ajouter</button>
+        <button class="orange">Modifier</button>
+        <button class="red">Supprimer</button>
+      </div>
+    </section>
+
+    <div class="footer">
+      <button class="blue">Valider</button>
+      <button class="orange">Annuler</button>
+    </div>
+  </div>
+</body>
+</html>

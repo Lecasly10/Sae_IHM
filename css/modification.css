@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    margin: 20px;
+}
+  
+.container {
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+  
+h3 {
+    background-color: #444;
+    color: white;
+    padding: 8px;
+    margin: 0 0 20px 0;
+}
+
+h4 {
+    background-color: #444;
+    color: white;
+    padding: 8px;
+    margin: 0 0 10px 0;
+}
+  
+.section {
+    border-top: 2px solid #ccc;
+    padding: 15px 0;
+}
+  
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+  
+input[type="text"],
+input[type="date"],
+textarea {
+    width: 300px;
+    margin-left: 10px;
+}
+  
+textarea {
+    width: 100%;
+    resize: none;
+}
+  
+.adherent-info {
+    margin-top: 10px;
+    line-height: 1.5;
+}
+  
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table th, table td {
+    border: 1px solid #000;
+    padding: 8px;
+    text-align: left;
+}
+  
+.table-buttons {
+    margin-top: 10px;
+}
+  
+.table-buttons button {
+    margin-right: 10px;
+    padding: 6px 12px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+  
+button.blue {
+    background-color: #0099ff;
+    color: white;
+}
+
+button.orange {
+    background-color: orange;
+    color: white;
+}
+  
+button.red {
+    background-color: red;
+    color: white;
+}
+  
+.footer {
+    text-align: right;
+    margin-top: 20px;
+}
+  
