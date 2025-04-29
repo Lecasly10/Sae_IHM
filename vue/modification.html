@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang = "fr">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>Liste des abonnement</title>
+        <link type="text/css" rel="stylesheet" href="./css/main.css">
+    </head>
+    <body>
+        <h3>Détail d'un abonnement</h3>
+        <section class="section">
+            <h4>IDENTIFICATION</h4>
+            <label>Numéro <input type="text" value="1"></label>
+            <label>Le <input type="date" value="2022-04-03"></label>
+            <label>Commentaire<br>
+                <textarea rows="2">ne souhaite pas une relance à la fin de son abonnement</textarea>
+            </label>
+        </section>
+
+        <section class="section">
+            <h4>ADHERENT</h4>
+            <label>Numéro <input type="text" value="2"></label>
+            <div class="adherent-info">
+                <p><strong>Adhérent :</strong> Mme CREZINA Albertine</p>
+                <p>al.crezina@free.fr<br>37 avenue Carnaval<br>54000 Nancy</p>
+                <p><strong>Catégorie SocioProfessionnelle</strong><br>Professeurs des écoles, instituteurs et assimilés</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h4>Adhésion</h4>
+            <div class="conteneur-sections">
+                <section class="table-section">
+                    <p class="sur"><strong>Total : 22,00 €</strong></p>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Libellé</th><th>Tarif de base</th><th>Version Papier</th><th>Montant</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>science fiction</td><td>5.00</td><td>O</td><td>10,00</td>
+                        </tr>
+                        <tr>
+                            <td>bande dessinée</td><td>0.00</td><td>N</td><td>4,00</td>
+                        </tr>
+                        <tr>
+                            <td>humour</td><td>8.00</td><td>N</td><td>8,00</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section class="table-section" id="abonnement_theme_edit">
+                    <p class="sur"><strong>Total : 22,00 €</strong></p>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Libellé</th><th>Tarif de base</th><th>Version Papier</th><th>Montant</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>science fiction</td><td>5.00</td><td>O</td><td>10,00</td>
+                        </tr>
+                        <tr>
+                            <td>bande dessinée</td><td>0.00</td><td>N</td><td>4,00</td>
+                        </tr>
+                        <tr>
+                            <td>humour</td><td>8.00</td><td>N</td><td>8,00</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </section>
+
+        <div class="footer">
+            <input id="btnRetour" type="button" value="Retour">
+        </div>
+        <script type="module" src="../controleur/main.js"></script>
+    </body>
+</html>
