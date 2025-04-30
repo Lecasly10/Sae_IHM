@@ -231,4 +231,11 @@ button {
     background-color: #444;
     color: white;
 }
-  
+
+.liste {
+    width : 100%;
+}
+
+.selected {
+    background-color: #a4cafe; /* Couleur claire pour la sélection */
+}

@@ -6,16 +6,63 @@ type TMainForm = {
     btnAjouter              : HTMLInputElement,
     btnSupprimer            : HTMLInputElement,
     btnModifier             : HTMLInputElement,
-    btnRetour               : HTMLInputElement
+    btnRetour               : HTMLInputElement,
+    tableAbonnement         : HTMLTableElement
 };
 
-interface Abonnement {
-    numero: string;
-    le: string;
-    adherent: string;
-    csp: string;
-    adhesion: string;
-    montant: number;
+class Abonnement {
+    private num : number;
+    private date : Date;
+    private nomAd : string;
+    private CSP : string;
+    private Adhé : number;
+    private Mont : number;
+
+    constructor(numéro: number = 0, date: Date = new Date(), nomAdér: string = "", CSp: string = "", Adhésion: number = 0, Montant: number = 0) { //appel base de données
+        this.num = numéro;
+        this.date = date;
+        this.nomAd = nomAdér;
+        this.CSP = CSp;
+        this.Adhé = Adhésion;
+        this.Mont = Montant;
+    }
+
+    get numAbonnement(): number {
+        return this.num;
+    }
+    set numAbonnement(num: number) {
+        this.num = num;
+    }
+    get dateAbonnement(): Date {
+        return this.date;
+    }
+    set dateAbonnement(date: Date) {
+        this.date = date;
+    }
+    get nomAdhérent(): string {
+        return this.nomAd;
+    }
+    set nomAdhérent(nom: string) {
+        this.nomAd = nom;
+    }
+    get CSp(): string {
+        return this.CSP;
+    }
+    set CSp(CSp: string) {
+        this.CSP= CSp;
+    }
+    get Adhésion(): number {
+        return this.Adhé;
+    }
+    set Adhésion(Adhésion: number) {
+        this.Adhé = Adhésion;
+    }
+    get Montant(): number {
+        return this.Mont;
+    }
+    set Montant(Montant: number) {
+        this.Mont = Montant;
+    }
 }
 
 class Vue {
@@ -24,47 +71,19 @@ class Vue {
     init(form: TMainForm): void {
         this._form = form;
 
-        this.form.btnDetail.onclick = () => this.detail();
-        this.form.btnAjouter.onclick = () => this.ajouter();
-        this.form.btnSupprimer.onclick = () => this.supprimer();
-        this.form.btnModifier.onclick = () => this.modifier();
-        this.form.btnRetour.onclick = () => this.retour();
+        this.form.btnDetail.onclick = () => function():void {vue.detail();}
+        this.form.btnAjouter.onclick = () => function():void {vue.ajouter();}
+        this.form.btnSupprimer.onclick = () => function():void {vue.supprimer();}
+        this.form.btnModifier.onclick = () => function():void {vue.modifier();}
+        this.form.btnRetour.onclick = () => function():void {vue.retour();}
     }
 
     get form(): TMainForm {
         return this._form;
     }
 
-    private ajouterLigne(ab: Abonnement): void {
-        const tbody = document.getElementById("tableBody") as HTMLTableSectionElement;
-        const tr = document.createElement("tr");
-
-        tr.innerHTML = `
-            <td>${ab.numero}</td>
-            <td>${ab.le}</td>
-            <td>${ab.adherent}</td>
-            <td>${ab.csp}</td>
-            <td>${ab.adhesion}</td>
-            <td>${ab.montant}</td>
-        `;
-
-        tbody.appendChild(tr);
-    }
-
     ajouter(): void {
-        const nouvelAbonnement: Abonnement = {
-            numero: "9999",
-            le: "salle test",
-            adherent: "testeur",
-            csp: "INFO",
-            adhesion: "Informatique",
-            montant: 99
-        };
-
-        this.ajouterLigne(nouvelAbonnement);
-
-        // Redirection si nécessaire
-        // window.location.href = "creation.html";
+        window.location.href = "creation.html";
     }
 
     supprimer(): void {
@@ -83,6 +102,8 @@ class Vue {
         window.location.href = "detail.html";
     }
 }
+
+let abonnement = new Abonnement();
 
 let vue = new Vue;
 
