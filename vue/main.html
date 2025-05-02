@@ -29,7 +29,36 @@
                     <th>Montant</th>
                 </tr>
             </thead>
-            <tbody id="tableBody"></tbody>
+            <tbody id="tableBody">
+                <tr onclick="toggleSelection(this)">
+                    <td></td>
+                    <td>Produit A</td>
+                    <td>12</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr onclick="toggleSelection(this)">
+                    <td></td>
+                    <td>Produit A</td>
+                    <td>12</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr onclick="toggleSelection(this)">
+                    <td></td>
+                    <td>Produit A</td>
+                    <td>12</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                
+            </tbody>
         </table>
         
         <div class="divaction">
@@ -39,5 +68,17 @@
             <input id="btnSupprimer" type="button" value="Supprimer" class="btnannuler"> 		
         </div>
         <script type="module" src="../controleur/main.js"></script>
+        <script>
+            function toggleSelection(row) {
+                // Si déjà sélectionnée, on la désélectionne
+                if (row.classList.contains('selected')) {
+                    row.classList.remove('selected');
+                    row.style.backgroundColor = '';
+                } else {
+                    row.classList.add('selected');
+                    row.style.backgroundColor = 'lightgreen';
+                }
+            }
+        </script>
     </body>
 </html>
