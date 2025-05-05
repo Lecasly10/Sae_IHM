@@ -8,16 +8,6 @@
     <body>
         <div id="divliste" class="divtitre">Liste des abonnement</div>
         
-        <form id="formAjout">
-            <input type="text" id="numero" placeholder="Numéro" required>
-            <input type="text" id="le" placeholder="Le">
-            <input type="text" id="adherent" placeholder="Adhérent">
-            <input type="text" id="csp" placeholder="CSP">
-            <input type="text" id="adhesion" placeholder="Adhésion">
-            <input type="number" id="montant" placeholder="Montant" required>
-            <input type="submit" value="Ajouter abonnement">
-        </form>
-        
         <table id="table">
             <thead>
                 <tr>
@@ -69,8 +59,16 @@
         </div>
         <script type="module" src="../controleur/main.js"></script>
         <script>
+            document.getElementById('btnDetail').addEventListener('click', function() {
+                window.location.href = 'detail.html';
+            });
+            document.getElementById('btnAjouter').addEventListener('click', function() {
+                window.location.href = 'creation.html';
+            });
+            document.getElementById('btnModifier').addEventListener('click', function() {
+                window.location.href = 'modification.html';
+            });
             function toggleSelection(row) {
-                // Si déjà sélectionnée, on la désélectionne
                 if (row.classList.contains('selected')) {
                     row.classList.remove('selected');
                     row.style.backgroundColor = '';

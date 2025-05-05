@@ -74,23 +74,6 @@ select option:hover {
     background-color	: #00b0ff; 
 }
   
-  /* titre */
-.labeltitre {
-    color 			: #ffffff;
-    background-color  : #444;
-    font-weight 		: bold; 
-    padding-top		: 0.4em;
-    width:100%;  
-}
-  
-.labelerreur {
-    text-align    : left;
-    font-size 		: 0.9em;
-    color     		: #ff0000;
-    font-style 		: italic;
-    margin-left		: 10px;
-}
-  
 .divtitre {
     background-color: #444;
     color 			: #ffffff; 

@@ -1,4 +1,4 @@
-class Adhérent {
+export class Adhérent {
     private num : number; // >0
     private nom : string; // peut etre vide mais limie à 50chars
     private civilité : string; // seulement M ou Mme

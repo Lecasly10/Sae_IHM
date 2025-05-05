@@ -1,4 +1,4 @@
-class CSP {
+export class CSP {
     private num : number; // entre 1 et 5chars
     private lib : string; // non vide limité à 100chars
 
