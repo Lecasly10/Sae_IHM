@@ -10,5 +10,5 @@ vue.init (
         btnSupprimer            :       document.querySelector('[id=btnSupprimer]'),
         btnModifier             :       document.querySelector('[id=btnModifier]'),
         btnRetour               :       document.querySelector('[id=btnRetour]'),
-        tableAbonnement         :       document.querySelector('[id=tableBody]'),
+        table                   :       document.querySelector('[id=table]'),
     } );

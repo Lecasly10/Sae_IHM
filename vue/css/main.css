@@ -219,6 +219,8 @@ button {
     width : 100%;
 }
 
-.selected {
-    background-color: #a4cafe; /* Couleur claire pour la sélection */
+tr.selected {
+    background-color: #007bff !important;
+    color: white !important;
 }
+  
