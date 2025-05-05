@@ -1,55 +1,57 @@
 class Abonnement {
-    private num : number;
-    private date : Date;
-    private nomAd : string;
-    private CSP : string;
-    private Adhé : number;
-    private Mont : number;
+    private num : number; // > 0
+    private date : Date; // <= date du jour
+    private comment : string; // peut etre vide mais limie à 400chars
+    private adhé_num : number; // > 0
 
-    constructor(numéro: number = 0, date: Date = new Date(), nomAdér: string = "", CSp: string = "", Adhésion: number = 0, Montant: number = 0) { //appel base de données
+    constructor(numéro: number = 0, date: Date = new Date(), nomAdér: string = "", CSp: string = "", Adhésion: number = 0, Montant: number = 0) {
         this.num = numéro;
         this.date = date;
-        this.nomAd = nomAdér;
-        this.CSP = CSp;
-        this.Adhé = Adhésion;
-        this.Mont = Montant;
     }
 
     get numAbonnement(): number {
         return this.num;
     }
+
     set numAbonnement(num: number) {
+        if (num <= 0) {
+            throw new Error("Le numéro d'abonnement doit être supérieur à 0\n");
+        }
         this.num = num;
     }
+    
     get dateAbonnement(): Date {
         return this.date;
     }
+
     set dateAbonnement(date: Date) {
+        const today = new Date();
+        if (date > today) {
+            throw new Error("La date d'abonnement ne peut pas être supérieure à la date du jour\n");
+        }
         this.date = date;
     }
-    get nomAdhérent(): string {
-        return this.nomAd;
+
+    get commentAbonnement(): string {
+        return this.comment;
     }
-    set nomAdhérent(nom: string) {
-        this.nomAd = nom;
+
+    set commentAbonnement(comment: string) {
+        if (comment.length > 400) {
+            throw new Error("Le commentaire ne peut pas dépasser 400 caractères\n");
+        }
+        this.comment = comment;
     }
-    get CSp(): string {
-        return this.CSP;
+
+    get adhé_numAbonnement(): number {
+        return this.adhé_num;
     }
-    set CSp(CSp: string) {
-        this.CSP = CSp;
-    }
-    get Adhésion(): number {
-        return this.Adhé;
-    }
-    set Adhésion(Adhésion: number) {
-        this.Adhé = Adhésion;
-    }
-    get Montant(): number {
-        return this.Mont;
-    }
-    set Montant(Montant: number) {
-        this.Mont = Montant;
+
+    set adhé_numAbonnement(num: number) {
+        if (num <= 0) {
+            throw new Error("Le numéro d'adhérent doit être supérieur à 0\n");
+        }
+        this.adhé_num = num;
     }
 }
 

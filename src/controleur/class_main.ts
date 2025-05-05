@@ -27,23 +27,23 @@ class Vue {
         return this._form;
     }
 
-    ajouter(): void {
+    private ajouter(): void {
         window.location.href = "creation.html";
     }
 
-    supprimer(): void {
-        alert("Fonction de suppression déclenchée (à implémenter)");
+    private supprimer(): void {
+        alert("Etes-vous sûr de vouloir supprimer cet abonnement ?");
     }
 
-    modifier(): void {
+    private modifier(): void {
         window.location.href = "modification.html";
     }
 
-    retour(): void {
+    private retour(): void {
         window.location.href = "main.html";
     }
 
-    detail(): void {
+    private detail(): void {
         window.location.href = "detail.html";
     }
 }
