@@ -1,52 +1,40 @@
 class Vue {
-    constructor() {
-        this._idSelect = "";
-    }
+    get form() { return this._form; }
+    get idSelect() { return this._idSelect; }
+    get noLigne() { return this._noLigne; }
     init(form) {
+        this._idSelect = '';
         this._form = form;
-        const tr = this.form.table.insertRow();
-        this.form.btnDetail.onclick = () => function () { vue.detail(); };
-        this.form.btnAjouter.onclick = () => function () { vue.ajouter(); };
-        this.form.btnSupprimer.onclick = () => function () { vue.supprimer(); };
-        this.form.btnModifier.onclick = () => function () { vue.modifier(); };
-        this.form.btnRetour.onclick = () => function () { vue.retour(); };
-        tr.onclick = () => function () { vue.selectionLigne(tr.rowIndex); };
-    }
-    get form() {
-        return this._form;
-    }
-    selectionLigne(noLigne) {
-        if (noLigne > -1) {
-            this.form.table.rows[noLigne].style.backgroundColor = '#ffffff';
+        const tbody = this.form.tableAbonnement.tBodies[0];
+        for (let i = 0; i < tbody.rows.length; i++) {
+            const row = tbody.rows[i];
+            const idAbonnement = row.cells[0].textContent || '';
+            row.onclick = () => this.selectionLigne(i, idAbonnement);
         }
-        this._idSelect = this.form.table.rows[noLigne].cells[0].innerHTML;
-        console.log("idSelect : " + this._idSelect);
-        this.form.table.rows[noLigne].style.backgroundColor = '#78c8ff';
+        this.form.btnAjouter.onclick = () => window.location.href = '../vue/creation.html';
+        this.form.btnModifier.onclick = () => {
+            if (this.idSelect !== '') {
+                window.location.href = '../vue/modification.html';
+            }
+        };
+        this.form.btnDetail.onclick = () => {
+            if (this.idSelect !== '') {
+                window.location.href = '../vue/detail.html';
+            }
+        };
+        this.form.btnSupprimer.onclick = () => {
+            if (this.idSelect !== '') {
+                alert(`Supprimer l’abonnement n°${this.idSelect} (action à définir).`);
+            }
+        };
     }
-    ajouter() {
-        window.location.href = "creation.html";
-    }
-    supprimer() {
-        alert("Etes-vous sûr de vouloir supprimer cet abonnement ?");
-        /*
-        if (this.form.liste.selectedIndex > -1) {
-            this.form.liste.remove(this.form.liste.selectedIndex)
-        }*/
-    }
-    modifier() {
-        window.location.href = "modification.html";
-    }
-    retour() {
-        window.location.href = "main.html";
-    }
-    detail() {
-        const target = event.target;
-        const row = target.closest("tr");
-        if (row && row.parentElement?.tagName === "TBODY") {
-            const index = row.rowIndex - 1; // -1 si ton tableau a un <thead>
-            console.log("Index de la ligne cliquée :", index);
+    selectionLigne(noLigne, id) {
+        if (this.idSelect !== '') {
+            this.form.tableAbonnement.rows[this.noLigne + 1].style.backgroundColor = '#ffffff'; // +1 à cause du thead
         }
-        window.location.href = "detail.html";
+        this._idSelect = id;
+        this._noLigne = noLigne;
+        this.form.tableAbonnement.rows[noLigne + 1].style.backgroundColor = '#78c8ff';
     }
 }
 let vue = new Vue;
