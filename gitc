@@ -41,8 +41,21 @@ tag() {
     fi
 }
 
+branche() {
+    echo "Nom de la branche à créer :"
+    read rep
+    git checkout -b "$rep"
+    echo -e "Branche '$rep' créée\n"
+}
+
+retourner() {
+    echo "Retour sur la branche 'main'"
+    git checkout main 2>/dev/null || git checkout master
+    echo -e "✅ Maintenant sur la branche principale\n"
+}
+
 clear
-select choix in "push" "pull" "clone" "status" "tag" "quitter"
+select choix in "push" "pull" "clone" "status" "tag" "créer une branche" "retourner sur main branch" "quitter"
 do
     case $REPLY in
         1) push ;;
@@ -50,7 +63,9 @@ do
         3) clone ;;
         4) git status ;;
         5) tag ;;
-        6) break ;;
+        6) branche ;;
+        7) retourner ;;
+        8) break ;;
         *) echo "Mauvaise entrée" ;;
     esac
 	attend
