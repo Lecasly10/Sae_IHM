@@ -1,51 +1,58 @@
-type TMainForm = {
-    abonnement_edit         : HTMLElement,
-    abonnement_theme        : HTMLElement,
-    abonnement_theme_edit   : HTMLElement,
-    btnDetail               : HTMLInputElement,
-    btnAjouter              : HTMLInputElement,
-    btnSupprimer            : HTMLInputElement,
-    btnModifier             : HTMLInputElement,
-    btnRetour               : HTMLInputElement,
-    tableAbonnement         : HTMLTableElement
-};
+type TMainForm = { 
+	btnAjouter      : HTMLInputElement,
+	btnModifier     : HTMLInputElement,
+	btnSupprimer    : HTMLInputElement,
+    btnDetail       : HTMLInputElement,
+    btnRetour       : HTMLInputElement,
+	tableAbonnement : HTMLTableElement 
+}
 
 class Vue {
-    private _form!: TMainForm;
+	private _form: TMainForm;
+	private _idSelect: string;
+	private _noLigne: number;
 
-    init(form: TMainForm): void {
-        this._form = form;
+	get form(): TMainForm { return this._form }
+	get idSelect(): string { return this._idSelect }
+	get noLigne(): number { return this._noLigne }
 
-        this.form.btnDetail.onclick = () => function():void {vue.detail();}
-        this.form.btnAjouter.onclick = () => function():void {vue.ajouter();}
-        this.form.btnSupprimer.onclick = () => function():void {vue.supprimer();}
-        this.form.btnModifier.onclick = () => function():void {vue.modifier();}
-        this.form.btnRetour.onclick = () => function():void {vue.retour();}
-    }
+	init(form: TMainForm): void {
+		this._idSelect = '';
+		this._form = form;
 
-    get form(): TMainForm {
-        return this._form;
-    }
+		const tbody = this.form.tableAbonnement.tBodies[0];
+		for (let i = 0; i < tbody.rows.length; i++) {
+			const row = tbody.rows[i];
+			const idAbonnement = row.cells[0].textContent || '';
+			row.onclick = () => this.selectionLigne(i, idAbonnement);
+		}
 
-    private ajouter(): void {
-        window.location.href = "creation.html";
-    }
+		this.form.btnAjouter.onclick = () => window.location.href = '../vue/creation.html';
+		this.form.btnModifier.onclick = () => {
+			if (this.idSelect !== '') {
+				window.location.href = '../vue/modification.html';
+			}
+		};
+        this.form.btnDetail.onclick = () => {
+			if (this.idSelect !== '') {
+				window.location.href = '../vue/detail.html';
+			}
+		};
+		this.form.btnSupprimer.onclick = () => {
+			if (this.idSelect !== '') {
+				alert(`Supprimer l’abonnement n°${this.idSelect} (action à définir).`);
+			}
+		};
+	}
 
-    private supprimer(): void {
-        alert("Etes-vous sûr de vouloir supprimer cet abonnement ?");
-    }
-
-    private modifier(): void {
-        window.location.href = "modification.html";
-    }
-
-    private retour(): void {
-        window.location.href = "main.html";
-    }
-
-    private detail(): void {
-        window.location.href = "detail.html";
-    }
+	selectionLigne(noLigne: number, id: string): void {
+		if (this.idSelect !== '') {
+			this.form.tableAbonnement.rows[this.noLigne + 1].style.backgroundColor = '#ffffff'; // +1 à cause du thead
+		}
+		this._idSelect = id;
+		this._noLigne = noLigne;
+		this.form.tableAbonnement.rows[noLigne + 1].style.backgroundColor = '#78c8ff';
+	}
 }
 
 let vue = new Vue;

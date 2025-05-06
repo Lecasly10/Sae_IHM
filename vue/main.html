@@ -19,13 +19,41 @@
                     <th>Montant</th>
                 </tr>
             </thead>
+            <tbody>
+                <tr>
+                    <td>232</td>
+                    <td>2023-01-01</td>
+                    <td>Jean Dupont</td>
+                    <td>Actif</td>
+                    <td>2023-12-31</td>
+                    <td>100€</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>2023-02-01</td>
+                    <td>Marie Curie</td>
+                    <td>Inactif</td>
+                    <td>2023-11-30</td>
+                    <td>150€</td>
+                </tr>
+                <tr>
+                    <td>55</td>
+                    <td>2023-02-01</td>
+                    <td>Marie Curie</td>
+                    <td>Inactif</td>
+                    <td>2023-11-30</td>
+                    <td>150€</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>2023-02-01</td>
+                    <td>Marie Curie</td>
+                    <td>Inactif</td>
+                    <td>2023-11-30</td>
+                    <td>150€</td>
+                </tr>
+            </tbody>
         </table>
-        <div class="gestion_liste">
-            <div>
-                <select id="select_texte" class="liste" size="10">
-                </select>
-            </div>
-        </div>
         
         <div class="divaction">
             <input id="btnDetail" type="button" value="Détail" class="btnretour"> 	
@@ -44,15 +72,6 @@
             document.getElementById('btnModifier').addEventListener('click', function() {
                 window.location.href = 'modification.html';
             });
-            function toggleSelection(row) {
-                if (row.classList.contains('selected')) {
-                    row.classList.remove('selected');
-                    row.style.backgroundColor = '';
-                } else {
-                    row.classList.add('selected');
-                    row.style.backgroundColor = 'lightgreen';
-                }
-            }
         </script>
     </body>
 </html>
