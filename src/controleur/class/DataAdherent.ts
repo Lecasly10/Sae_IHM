@@ -1,4 +1,6 @@
-import { connexion, APIsql } from "../../modele/connexion";
+//département je pense
+
+import { connexion, APIsql } from "../../modele/connexion.ts";
 class UnAdhérent 
 {
     private _adh_num : number; // >0   
@@ -11,15 +13,16 @@ class UnAdhérent
     private _adh_mel : string; // peut etre vide mais limie à 50chars et respecter le format
     private _csp_num : number; // entre 1 et 5chars
 
-    constructor(num: number = 0, nom: string = "", prenom: string = "", adr: string = "", cp: string = "", ville: string = "", mel: string = "", csp_num: number = 0) {
-        this._adh_num = num;
-        this._adh_nom = nom;
-        this._adh_prenom = prenom;
-        this._adh_adr = adr;
-        this._adh_cp = cp;
-        this._adh_ville = ville;
-        this._adh_mel = mel;
-        this.csp_numAdhé = csp_num;
+    constructor(numAdh: number = 0, civi : string = "", nomAdhé: string = "", prenomAdhé: string = "", adrAdhé: string = "", cpAdhé: string = "", villeAdhé: string = "", melAdhé: string = "", csp_numAdhé: number = 0) {
+        this._adh_num = numAdh;
+        this._adh_civ = civi;
+        this._adh_nom = nomAdhé;
+        this._adh_prenom = prenomAdhé;
+        this._adh_adr = adrAdhé;
+        this._adh_cp = cpAdhé;
+        this._adh_ville = villeAdhé;
+        this._adh_mel = melAdhé;
+        this._csp_num = csp_numAdhé;
     }
 
     get numAdhé(): number {
@@ -119,7 +122,7 @@ class UnAdhérent
         // renvoie l’objet sous la forme d’un tableau associatif
         // pour un affichage dans une ligne d’un tableau HTML
         let tableau : APIsql.TtabAsso = 
-        {   
+        {
             'adh_num':this._adh_num.toString(),
             'adh_nom':this._adh_nom,
             'adh_prenom':this._adh_prenom,
@@ -148,14 +151,15 @@ class LesAdhérents{
             const item:APIsql.TtabAsso = result[i];
             const Adherent = new UnAdhérent
             (
-                Number(item.adh_num),
+                parseInt(item.adh_num),
+                item.adh_civ,
                 item.adh_nom,
                 item.adh_prenom,
                 item.adh_adr,
                 item.adh_cp,
                 item.adh_ville,
                 item.adh_mel,
-                Number(item.csp_num)
+                parseInt(item.csp_num)
             );
             Adherents[item.adh_num] = Adherent; // affecte l’objet « Adherent » dans le tableau associatif « Adherents »
         }
@@ -176,19 +180,19 @@ class LesAdhérents{
         return this.load(APIsql.sqlWeb.SQLloadData(this.prepare(""),[]));
         }
 
-        byNumAdh(adh_adr : string) : UnAdhérent 
+       byNumAdh(adh_num : string) : UnAdhérent 
         { 
-            // renvoie l’objet correspondant au adherent adh_adr
+            // renvoie l’objet correspondant au adhénnement adh_num
             // ou un tableau vide si pas trouvé
-            let adh = new UnAdhérent;
-            const adhs : Tadherent = this.load(APIsql.sqlWeb.SQLloadData(this.prepare("adh_adr = ?"),[adh_adr]));
-            const lesCles: string[] = Object.keys(adhs);
-            // affecte les clés du tableau associatif « adhs » dans le tableau de chaines « lesCles »
+            let adhé = new UnAdhérent;
+            const adhés : Tadherent = this.load(APIsql.sqlWeb.SQLloadData(this.prepare("adh_num = ?"),[adh_num]));
+            const lesCles: string[] = Object.keys(adhés);
+            // affecte les clés du tableau associatif « adhés » dans le tableau de chaines « lesCles »
             if ( lesCles.length > 0) 
             {
-                adh = adhs[lesCles[0]]; // récupérer le 1er élément du tableau associatif « adhs »
+                adhé = adhés[lesCles[0]]; // récupérer le 1er élément du tableau associatif « adhés »
             }
-            return adh;
+            return adhé;
         }
 
         toArray(adhs : Tadherent) : APIsql.TdataSet 

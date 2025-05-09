@@ -1,4 +1,7 @@
-import { connexion, APIsql } from "../../modele/connexion";
+//relation maitre je pense
+//salle je pense
+
+import { connexion, APIsql } from "../../modele/connexion.ts";
 class UnAbonnement {
     private _abon_num : number; // > 0
     private _abon_date : Date; // <= date du jour
@@ -87,7 +90,7 @@ class LesAbonnements{
             const Abonnement = new UnAbonnement
             (
                 Number(item['abon_num']),   //ici ca peut bug 
-                new Date(item['aexportbon_date']), //je sais pas pourquoi ya un new ici mais si il est pas la ca bug
+                new Date(item['abon_date']), //je sais pas pourquoi ya un new ici mais si il est pas la ca bug
                 item['abon_comment'],
                 item['adh_num']
             );
@@ -106,39 +109,66 @@ class LesAbonnements{
         return sql;
     }
 
-    all() : TAbonnement { // renvoie le tableau d’objets contenant tous les Abonnements
+    all() : TAbonnement 
+    { // renvoie le tableau d’objets contenant tous les Abonnements
         return this.load(APIsql.sqlWeb.SQLloadData(this.prepare(""),[]));
-        }
+    }
 
-        byNumAbo(abon_num : string) : UnAbonnement 
-        { 
-            // renvoie l’objet correspondant au abonnement abon_num
-            // ou un tableau vide si pas trouvé
-            let abo = new UnAbonnement;
-            const abos : TAbonnement = this.load(APIsql.sqlWeb.SQLloadData(this.prepare("abon_num = ?"),[abon_num]));
-            const lesCles: string[] = Object.keys(abos);
-            // affecte les clés du tableau associatif « abos » dans le tableau de chaines « lesCles »
-            if ( lesCles.length > 0) 
-            {
-                abo = abos[lesCles[0]]; // récupérer le 1er élément du tableau associatif « abos »
-            }
-            return abo;
-        }
-
-        toArray(depts : TAbonnement) : APIsql.TdataSet 
+    byNumAbo(abon_num : string) : UnAbonnement 
+    { 
+        // renvoie l’objet correspondant au abonnement abon_num
+        // ou un tableau vide si pas trouvé
+        let abo = new UnAbonnement;
+        const abos : TAbonnement = this.load(APIsql.sqlWeb.SQLloadData(this.prepare("abon_num = ?"),[abon_num]));
+        const lesCles: string[] = Object.keys(abos);
+        // affecte les clés du tableau associatif « abos » dans le tableau de chaines « lesCles »
+        if ( lesCles.length > 0) 
         {
-            // renvoie le tableau d’objets sous la forme d’un tableau de tableaux associatifs
-            // pour un affichage dans un tableau HTML
-            let T:APIsql.TdataSet = [];
-            for (let id in depts) 
-            {
-                T.push(depts[id].toArray());
-            }
-            return T;
+            abo = abos[lesCles[0]]; // récupérer le 1er élément du tableau associatif « abos »
         }
+        return abo;
+    }
+
+    toArray(abos : TAbonnement) : APIsql.TdataSet 
+    {
+        // renvoie le tableau d’objets sous la forme d’un tableau de tableaux associatifs
+        // pour un affichage dans un tableau HTML
+        let T:APIsql.TdataSet = [];
+        for (let id in abos) 
+        {
+            T.push(abos[id].toArray());
+        }
+        return T;
+    }
+
+    delete(abon : UnAbonnement):boolean
+    {
+        // requête de suppression d’un abonnement dans la table
+        let sql : string;
+        sql = "DELETE FROM abonnement WHERE abon_num = ?";
+        // requête de manipulation : utiliser SQLexec
+        return APIsql.sqlWeb.SQLexec(sql,[abon.numAbonnement]);
+    }
+
+    insert(abon : UnAbonnement):boolean
+    {
+        // requête d’insertion d’un abonnement dans la table
+        let sql : string;
+        sql = "INSERT INTO abonnement (abon_num, abon_date, abon_comment, adh_num) VALUES (?, ?, ?, ?)";
+        // requête de manipulation : utiliser SQLexec
+        return APIsql.sqlWeb.SQLexec(sql,[abon.numAbonnement, abon.dateAbonnement, abon.commentAbonnement, abon.adhé_numAbonnement]);
+    }
+
+    update(abon : UnAbonnement):boolean
+    {
+        // requête de mise à jour d’un abonnement dans la table
+        let sql : string;
+        sql = "UPDATE abonnement SET abon_date = ?, abon_comment = ?, adh_num = ? WHERE abon_num = ?";
+        // requête de manipulation : utiliser SQLexec
+        return APIsql.sqlWeb.SQLexec(sql,[abon.dateAbonnement, abon.commentAbonnement, abon.adhé_numAbonnement, abon.numAbonnement]);
+    }
+
 }
 
-export {connexion}
-export {UnAbonnement}
-export {LesAbonnements}
-export {TAbonnement}
+export {connexion, UnAbonnement, LesAbonnements}
+export type {TAbonnement}

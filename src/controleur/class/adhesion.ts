@@ -1,31 +1,43 @@
+//adhesion = contient 
+
 export class Adhésion {
-    private abo_num : number; // >0
-    private them_num : number; // >0
+    private abon_num : number; // >0
+    private theme_num : number; // >0
+    private envoi_papier : boolean; // true ou false
 
-    constructor(abo_num: number, them_num: number) {
-        this.abo_num = abo_num;
-        this.them_num = them_num;
+    constructor(numéro: number = 0, theme_numéro: number = 0, envoi_papier: boolean = false) {
+        this.abon_num = numéro;
+        this.theme_num = theme_numéro;
+        this.envoi_papier = envoi_papier;
     }
 
-    get abo_numAdhé(): number {
-        return this.abo_num;
+    get abon_numAdhé(): number {
+        return this.abon_num;
     }
 
-    set abo_numAdhé(nom: number) {
+    set abon_numAdhé(nom: number) {
         if (nom <= 0) {
             throw new Error("Le numéro d'abonnement doit être supérieur à 0\n");
         }
-        this.abo_num = nom;
+        this.abon_num = nom;
     }
 
-    get them_numAdhé(): number {
-        return this.them_num;
+    get theme_numAdhé(): number {
+        return this.theme_num;
     }
 
-    set them_numAdhé(them_num: number) {
-        if (them_num <= 0) {
+    set theme_numAdhé(theme_num: number) {
+        if (theme_num <= 0) {
             throw new Error("Le numéro de thème doit être supérieur à 0\n");
         }
-        this.them_num = them_num;
+        this.theme_num = theme_num;
+    }
+
+    get envoi_papierAdhé(): boolean {
+        return this.envoi_papier;
+    }
+
+    set envoi_papierAdhé(envoi_papier: boolean) {
+        this.envoi_papier = envoi_papier;       // il faudra peut etre faire une verif ici a voir
     }
 }

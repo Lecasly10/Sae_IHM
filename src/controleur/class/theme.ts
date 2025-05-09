@@ -1,46 +1,48 @@
+//ca doit etre un truc comme adherent je pense
+
 export class Theme {
-    private num : number; // >0
-    private lib : string; // entre 2 et 20chars
-    private tarif : Float32Array; // >0
+    private theme_num : number; // >0
+    private theme_lib : string; // entre 2 et 20chars
+    private theme_tarif : Float32Array; // >0
 
-    constructor(numéro: number, libelé: string, tarif: Float32Array) {
-        this.num = numéro;
-        this.lib = libelé;
-        this.tarif = tarif;
+    constructor(theme_numéro: number, theme_libelé: string, theme_tarif: Float32Array) {
+        this.theme_num = theme_numéro;
+        this.theme_lib = theme_libelé;
+        this.theme_tarif = theme_tarif;
     }
 
-    get numCSP(): number {
-        return this.num;
+    get theme_numCSP(): number {
+        return this.theme_num;
     }
 
-    set numCSP(nom: number) {
+    set theme_numCSP(nom: number) {
         if (nom <= 0) {
-            throw new Error("Le numéro doit être supérieur à 0\n");
+            throw new Error("Le theme_numéro doit être supérieur à 0\n");
         }
-        this.num = nom;
+        this.theme_num = nom;
     }
 
-    get libCSP(): string {
-        return this.lib;
+    get theme_libCSP(): string {
+        return this.theme_lib;
     }
 
-    set libCSP(adresse: string) {
+    set theme_libCSP(adresse: string) {
         if (adresse.length > 20 || adresse.length < 2) {
-            throw new Error("Le libellé doit être compris entre 2 et 20 caractères\n");
+            throw new Error("Le theme_libellé doit être compris entre 2 et 20 caractères\n");
         }
-        this.lib = adresse;
+        this.theme_lib = adresse;
     }
 
-    get tarifCSP(): Float32Array {
-        return this.tarif;
+    get theme_tarifCSP(): Float32Array {
+        return this.theme_tarif;
     }
 
-    set tarifCSP(tarif: Float32Array) {
-        for (const t of tarif) {
+    set theme_tarifCSP(theme_tarif: Float32Array) {
+        for (const t of theme_tarif) {
             if (t <= 0) {
-                throw new Error("Chaque tarif doit être supérieur à 0\n");
+                throw new Error("Chaque theme_tarif doit être supérieur à 0\n");
             }
         }
-        this.tarif = tarif;
+        this.theme_tarif = theme_tarif;
     }
 }
