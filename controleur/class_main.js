@@ -3,24 +3,26 @@ class Vue {
     get idSelect() { return this._idSelect; }
     get noLigne() { return this._noLigne; }
     init(form) {
+        console.log("URL actuelle :", window.location.href);
         this._idSelect = '';
         this._form = form;
-        const data = [
-            { num: 101, date: "2023-01-01", Adherent: "Jean Dupont", CSP: "Actif", Adhésion: "2023-01-01", Montant: 100 },
-            { num: 202, date: "2023-01-01", Adherent: "Jean Dupont", CSP: "Actif", Adhésion: "2023-01-01", Montant: 100 },
-            { num: 303, date: "2023-01-01", Adherent: "Jean Dupont", CSP: "Actif", Adhésion: "2023-01-01", Montant: 100 }
+        this._data = [
+            { num: 101, date: "2023-01-01", Adherent: "Jean Dupont", CSP: "Actif", Adhésion: 3, Montant: 100 },
+            { num: 202, date: "2023-01-01", Adherent: "Jean Dupont", CSP: "Actif", Adhésion: 2, Montant: 100 },
+            { num: 303, date: "2023-01-01", Adherent: "Jean Dupont", CSP: "Actif", Adhésion: 5, Montant: 100 }
         ];
-        for (let uneSalle of data) {
+        // Remplissage du tableau
+        for (let uneSalle of this._data) {
             const tr = this.form.tableAbonnement.insertRow();
             tr.insertCell().textContent = uneSalle.num.toString();
             tr.insertCell().textContent = uneSalle.date;
             tr.insertCell().textContent = uneSalle.Adherent;
             tr.insertCell().textContent = uneSalle.CSP;
-            tr.insertCell().textContent = uneSalle.Adhésion;
+            tr.insertCell().textContent = uneSalle.Adhésion.toString();
             tr.insertCell().textContent = uneSalle.Montant.toString();
             tr.onclick = () => this.selectionLigne(tr.rowIndex, uneSalle.num.toString());
         }
-        this.form.abonnement_theme_edit.style.display = 'hidden';
+        // Gestion des boutons
         this.form.btnAjouter.onclick = () => window.location.href = '../vue/creation.html';
         this.form.btnModifier.onclick = () => {
             if (this.idSelect !== '') {
@@ -28,21 +30,26 @@ class Vue {
             }
         };
         this.form.btnDetail.onclick = () => {
-            if (this.idSelect !== '') {
-                window.location.href = '../vue/detail.html';
-            }
-            this.form.num_adhé.value = data[this.noLigne].num.toString();
-            this.form.date_adhé.value = data[this.noLigne].date;
-            this.form.comm.value = 'Commentaire'; //select commentaire from abonnement where num_adhésion = data[this.idSelect].num;
-            this.form.num_ad.value = 'Numéro adhérent'; //select num_ad from abonnement where num_adhésion = data[this.idSelect].num;
+            vue.detail(this.noLigne);
         };
-        this.form.btnSupprimer.onclick = () => {
-            if (this.idSelect !== '') {
-                alert(`Supprimer l’abonnement n°${this.idSelect} ?`);
-                this.form.tableAbonnement.deleteRow(this.noLigne);
-                this._noLigne = 0;
-            }
-        };
+        this.form.btnSupprimer.onclick = () => function () { vue.supprimerLigne(); };
+    }
+    detail(index) {
+        if (this.idSelect !== '') {
+            /*this.form.num_adhé.value = this._data[this.noLigne].num.toString();
+            this.form.date_adhé.value = this._data[this.noLigne].date;
+            this.form.comm.value = "Commentaire"; // à adapter
+            this.form.num_ad.value = "Numéro adhérent"; // à adapter
+            console.log(this.form.num_adhé.value + " " + this.form.date_adhé.value);*/
+            window.location.href = "../vue/detail.html?index=" + encodeURIComponent(index.toString());
+        }
+    }
+    supprimerLigne() {
+        if (this.idSelect !== '') {
+            alert(`Supprimer l’abonnement n°${this.idSelect} ?`);
+            this.form.tableAbonnement.deleteRow(this.noLigne);
+            this._noLigne = 0;
+        }
     }
     selectionLigne(noLigne, id) {
         if (this.idSelect !== '') {
