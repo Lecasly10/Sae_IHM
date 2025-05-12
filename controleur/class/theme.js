@@ -1,37 +1,38 @@
+//ca doit etre un truc comme adherent je pense
 export class Theme {
-    constructor(numéro, libelé, tarif) {
-        this.num = numéro;
-        this.lib = libelé;
-        this.tarif = tarif;
+    constructor(theme_numéro, theme_libelé, theme_tarif) {
+        this.theme_num = theme_numéro;
+        this.theme_lib = theme_libelé;
+        this.theme_tarif = theme_tarif;
     }
-    get numCSP() {
-        return this.num;
+    get theme_numCSP() {
+        return this.theme_num;
     }
-    set numCSP(nom) {
+    set theme_numCSP(nom) {
         if (nom <= 0) {
-            throw new Error("Le numéro doit être supérieur à 0\n");
+            throw new Error("Le theme_numéro doit être supérieur à 0\n");
         }
-        this.num = nom;
+        this.theme_num = nom;
     }
-    get libCSP() {
-        return this.lib;
+    get theme_libCSP() {
+        return this.theme_lib;
     }
-    set libCSP(adresse) {
+    set theme_libCSP(adresse) {
         if (adresse.length > 20 || adresse.length < 2) {
-            throw new Error("Le libellé doit être compris entre 2 et 20 caractères\n");
+            throw new Error("Le theme_libellé doit être compris entre 2 et 20 caractères\n");
         }
-        this.lib = adresse;
+        this.theme_lib = adresse;
     }
-    get tarifCSP() {
-        return this.tarif;
+    get theme_tarifCSP() {
+        return this.theme_tarif;
     }
-    set tarifCSP(tarif) {
-        for (const t of tarif) {
+    set theme_tarifCSP(theme_tarif) {
+        for (const t of theme_tarif) {
             if (t <= 0) {
-                throw new Error("Chaque tarif doit être supérieur à 0\n");
+                throw new Error("Chaque theme_tarif doit être supérieur à 0\n");
             }
         }
-        this.tarif = tarif;
+        this.theme_tarif = theme_tarif;
     }
 }
 //# sourceMappingURL=theme.js.map

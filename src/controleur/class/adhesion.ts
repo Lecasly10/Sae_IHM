@@ -1,5 +1,6 @@
 //adhesion = contient 
 
+import { APIsql } from "../../modele/connexion.js";
 class UneAdhésion {
     private abon_num : number; // >0
     private theme_num : number; // >0
@@ -46,9 +47,9 @@ class UneAdhésion {
         // renvoie l’objet sous la forme d’un tableau associatif
         // pour un affichage dans une ligne d’un tableau HTML
         let tableau: APIsql.TtabAsso = {
-            "abon_num": this.abon_num,
-            "theme_num": this.theme_num,
-            "envoi_papier": this.envoi_papier
+            "abon_num": this.abon_num.toString(),
+            "theme_num": this.theme_num.toString(),
+            "envoi_papier": this.envoi_papier.toString()
         };
         return tableau;
     }
@@ -66,7 +67,7 @@ class LesAdhésions {
         let lesAdhésions: TAdhésion = {};
         for (let i = 0; i < result.length; i++) 
         {
-            const item.APIsql.TtabAsso = result[i];
+            /*const item.APIsql.TtabAsso = result[i];
             const Adhes = new UneAdhésion
             (
                 item.['abon_num'], 
@@ -74,6 +75,7 @@ class LesAdhésions {
                 item.['envoi_papier']
             );
             Adhes[Adhes.abon_num] = Adhes;
+            */
         }
         return lesAdhésions;
     }
@@ -93,27 +95,27 @@ class LesAdhésions {
 
     all() : TAdhésion
     {
-        return this.load(APIsql.sqlWeb.SQLloadDate(this.prepare(""),[]));
+        return this.load(APIsql.sqlWeb.SQLloadData(this.prepare(""),[]));
     }
 
-    byAbon(abon_num: number) : TAdhésion
+    /*byAbon(abon_num: number) : TAdhésion
     {
         let Adhesion = new UneAdhésion;
         const Adhesions : TAdhésion = this.load(APIsql.sqlWeb.SQLloadData
-        (this.prepare("abon_num = ?"),[abon_num]));
-        const LesCles: string[] = Object.keys(Adhésions);
+        (this.prepare("abon_num = ?"),[abon_num.toString()]));
+        const LesCles: string[] = Object.keys(Adhesions);
         if (LesCles.length > 0) 
         {
-            Adhesion = Adhésions[LesCles[0]];
+            Adhesion = Adhesions[LesCles[0]];
         }
         return Adhesion;
-    }
+    }*/
 
     toArray(adhésions: TAdhésion): APIsql.TdataSet
     {
         // renvoie un tableau associatif contenant les adhésions
         let tableau: APIsql.TdataSet = [];
-        const LesCles: string[] = Object.keys(adhésions);
+        //const LesCles: string[] = Object.keys(adhésions);
         for (let id in adhésions) 
         {
             tableau.push(adhésions[id].toArray());
@@ -121,6 +123,8 @@ class LesAdhésions {
         return tableau;
     }
 }
+
+const lesAdhésions = new LesAdhésions();
 
 class UneAdhésionAbon {
     private abon_num: number; // >0
@@ -136,6 +140,13 @@ class UneAdhésionAbon {
     get abon_numAdhé(): number {
         return this.abon_num;
     }
-    
-
+    get theme_numAdhé(): number {
+        return this.theme_num;
+    }
+    get envoi_papierAdhé(): boolean {
+        return this.envoi_papier;
+    }
 }
+
+const UneAdhésionAbons = new UneAdhésionAbon();
+export { UneAdhésion, LesAdhésions, UneAdhésionAbon, UneAdhésionAbons, lesAdhésions };

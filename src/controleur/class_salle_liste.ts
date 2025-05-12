@@ -1,7 +1,7 @@
 // importation des classes de gestion des données d’une salle et de ses équipements
-import {UneSalle, LesSalles, TSalles} from "../modele/data_salle.js"
-import {LesDepts} from "../modele/data_departement.js"
-import {LesTypEquiptsBySalle} from "../modele/data_equipement.js"
+//import {UneSalle, LesSalles} from "../modele/data_salle.js"
+//import {LesDepts} from "../modele/data_departement.js"
+//import {LesTypEquiptsBySalle} from "../modele/data_equipement.js"
 // déclaration de l’ensemble des zones de saisie et d’affichage nécessaires à la gestion du formulaire type
 type TSalleListeForm = {
 divTitre :HTMLElement, btnAjouter :HTMLInputElement, tableSalle : HTMLTableElement
@@ -10,7 +10,7 @@ class VueSalleListe {
 private _form : TSalleListeForm;
 get form() :TSalleListeForm { return this._form }
 init(form : TSalleListeForm ):void {
-    this._form = form;
+    this._form = form;/*
     const lesSalles = new LesSalles;
     const lesDepts = new LesDepts();
     const lesTypEquiptsBySalle = new LesTypEquiptsBySalle();
@@ -45,23 +45,25 @@ init(form : TSalleListeForm ):void {
     }
     // définition événement onclick sur bouton "ajouter"
     this.form.btnAjouter.onclick = function():void { vueSalleListe.ajouterSalleClick(); }
-    }
+    */}
+    
+    /*
     detailSalleClick(num : string):void {
         // redirection vers « salle_edit.html »avec indication du statut « affi » et du numéro de salle
         location.href = "salle_edit.html?affi&" +encodeURIComponent(num);
-        }
-        modifierSalleClick(num : string):void {
+    }
+    modifierSalleClick(num : string):void {
         // redirection vers « salle_edit.html »avec indication du statut « modif » et du numéro de salle
         location.href = "salle_edit.html?modif&" +encodeURIComponent(num)
-        }
-        supprimerSalleClick(num : string):void {
+    }
+    supprimerSalleClick(num : string):void {
         // redirection vers « salle_edit.html »avec indication du statut »suppr » et du numéro de salle
         location.href = "salle_edit.html?suppr&" +encodeURIComponent(num)
-        }
-        ajouterSalleClick():void {
+    }
+    ajouterSalleClick():void {
         // redirection vers « salle_edit.html »avec indication du statut « ajout »
         location.href = "salle_edit.html?ajout"
-        }
-        }
-        let vueSalleListe = new VueSalleListe;
-        export {vueSalleListe}
+    }*/
+}
+let vueSalleListe = new VueSalleListe;
+export {vueSalleListe}

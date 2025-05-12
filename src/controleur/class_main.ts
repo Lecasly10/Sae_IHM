@@ -20,11 +20,32 @@ class Vue {
 		this._idSelect = '';
 		this._form = form;
 
-		const tbody = this.form.tableAbonnement.tBodies[0];
-		for (let i = 0; i < tbody.rows.length; i++) {
-			const row = tbody.rows[i];
-			const idAbonnement = row.cells[0].textContent || '';
-			row.onclick = () => this.selectionLigne(i, idAbonnement);
+		interface UneSalle {
+			num: number;
+			date: string;
+			Adherent: string;
+			CSP: string;
+			Adhésion: string;
+			Montant: number;
+		}
+
+		const data: Array<UneSalle> = [
+			{ num: 101, date: "2023-01-01", Adherent: "Jean Dupont", CSP: "Actif", Adhésion: "2023-01-01", Montant: 100},
+			{ num: 202, date: "2023-01-01", Adherent: "Jean Dupont", CSP: "Actif", Adhésion: "2023-01-01", Montant: 100 },
+			{ num: 303, date: "2023-01-01", Adherent: "Jean Dupont", CSP: "Actif", Adhésion: "2023-01-01", Montant: 100 }
+		];
+
+		for (let num in data) {
+			const uneSalle : UneSalle = data[num];
+
+			const tr = this.form.tableAbonnement.insertRow();
+			tr.insertCell().textContent = uneSalle.num.toString();
+			tr.insertCell().textContent = uneSalle.date;
+			tr.insertCell().textContent = uneSalle.Adherent;
+			tr.insertCell().textContent = uneSalle.CSP;
+			tr.insertCell().textContent = uneSalle.Adhésion;
+			tr.insertCell().textContent = uneSalle.Montant.toString();
+			tr.onclick  = function():void { vue.selectionLigne(tr.rowIndex , uneSalle.num.toString()); }		
 		}
 
 		this.form.btnAjouter.onclick = () => window.location.href = '../vue/creation.html';

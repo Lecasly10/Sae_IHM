@@ -1,7 +1,7 @@
 //relation maitre je pense
 //salle je pense
 
-import { connexion, APIsql } from "../../modele/connexion.ts";
+import { connexion, APIsql } from "../../modele/connexion.js";
 class UnAbonnement {
     private _abon_num : number; // > 0
     private _abon_date : Date; // <= date du jour
@@ -147,7 +147,7 @@ class LesAbonnements{
         let sql : string;
         sql = "DELETE FROM abonnement WHERE abon_num = ?";
         // requête de manipulation : utiliser SQLexec
-        return APIsql.sqlWeb.SQLexec(sql,[abon.numAbonnement]);
+        return APIsql.sqlWeb.SQLexec(sql,[abon.numAbonnement.toString()]);
     }
 
     insert(abon : UnAbonnement):boolean
@@ -156,7 +156,7 @@ class LesAbonnements{
         let sql : string;
         sql = "INSERT INTO abonnement (abon_num, abon_date, abon_comment, adh_num) VALUES (?, ?, ?, ?)";
         // requête de manipulation : utiliser SQLexec
-        return APIsql.sqlWeb.SQLexec(sql,[abon.numAbonnement, abon.dateAbonnement, abon.commentAbonnement, abon.adhé_numAbonnement]);
+        return APIsql.sqlWeb.SQLexec(sql,[abon.numAbonnement.toString(), abon.dateAbonnement.toString(), abon.commentAbonnement, abon.adhé_numAbonnement.toString()]);
     }
 
     update(abon : UnAbonnement):boolean
@@ -165,7 +165,7 @@ class LesAbonnements{
         let sql : string;
         sql = "UPDATE abonnement SET abon_date = ?, abon_comment = ?, adh_num = ? WHERE abon_num = ?";
         // requête de manipulation : utiliser SQLexec
-        return APIsql.sqlWeb.SQLexec(sql,[abon.dateAbonnement, abon.commentAbonnement, abon.adhé_numAbonnement, abon.numAbonnement]);
+        return APIsql.sqlWeb.SQLexec(sql,[abon.dateAbonnement.toString(), abon.commentAbonnement, abon.adhé_numAbonnement.toString(), abon.numAbonnement.toString()]);
     }
 
 }
