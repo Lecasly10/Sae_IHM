@@ -1,10 +1,16 @@
 type TMainForm = { 
-	btnAjouter      : HTMLInputElement,
-	btnModifier     : HTMLInputElement,
-	btnSupprimer    : HTMLInputElement,
-    btnDetail       : HTMLInputElement,
-    btnRetour       : HTMLInputElement,
-	tableAbonnement : HTMLTableElement 
+	btnAjouter      		: HTMLInputElement,
+	btnModifier     		: HTMLInputElement,
+	btnSupprimer    		: HTMLInputElement,
+    btnDetail       		: HTMLInputElement,
+    btnRetour       		: HTMLInputElement,
+	tableAbonnement 		: HTMLTableElement,
+	abonnement_theme_edit	: HTMLInputElement,
+	abonnement_theme		: HTMLInputElement,
+	num_adhé 				: HTMLInputElement,
+	date_adhé 				: HTMLInputElement,
+	comm					: HTMLInputElement,
+	num_ad					: HTMLInputElement,
 }
 
 class Vue {
@@ -46,6 +52,7 @@ class Vue {
 		
 			tr.onclick = () => this.selectionLigne(tr.rowIndex, uneSalle.num.toString());
 		}
+		this.form.abonnement_theme_edit.style.display = 'hidden';
 
 		this.form.btnAjouter.onclick = () => window.location.href = '../vue/creation.html';
 		this.form.btnModifier.onclick = () => {
@@ -57,11 +64,18 @@ class Vue {
 			if (this.idSelect !== '') {
 				window.location.href = '../vue/detail.html';
 			}
+			this.form.num_adhé.value = data[this.noLigne].num.toString();
+			this.form.date_adhé.value = data[this.noLigne].date;
+			this.form.comm.value = 'Commentaire';//select commentaire from abonnement where num_adhésion = data[this.idSelect].num;
+			this.form.num_ad.value = 'Numéro adhérent';//select num_ad from abonnement where num_adhésion = data[this.idSelect].num;
+
+
 		};
 		this.form.btnSupprimer.onclick = () => {
 			if (this.idSelect !== '') {
 				alert(`Supprimer l’abonnement n°${this.idSelect} ?`);
 				this.form.tableAbonnement.deleteRow(this.noLigne);
+				this._noLigne = 0;
 			}
 		};
 	}

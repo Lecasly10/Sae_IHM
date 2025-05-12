@@ -9,16 +9,16 @@
         <h3>Détail d'un abonnement</h3>
         <section class="section">
             <h4>IDENTIFICATION</h4>
-            <label>Numéro <input type="text" value="1"></label>
-            <label>Le <input type="date" value="2022-04-03"></label>
+            <label>Numéro <input type="text" id="num_adhé"></label>
+            <label>Le <input type="date" id="date_adhé"></label>
             <label>Commentaire<br>
-                <textarea rows="2">ne souhaite pas une relance à la fin de son abonnement</textarea>
+                <textarea rows="2" id="comm">ne souhaite pas une relance à la fin de son abonnement</textarea>
             </label>
         </section>
 
         <section class="section">
             <h4>ADHERENT</h4>
-            <label>Numéro <input type="text" value="2"></label>
+            <label>Numéro <input type="text" value="2" id="num_ad"></label>
             <div class="adherent-info">
                 <p><strong>Adhérent :</strong> Mme CREZINA Albertine</p>
                 <p>al.crezina@free.fr<br>37 avenue Carnaval<br>54000 Nancy</p>
@@ -29,7 +29,7 @@
         <section class="section">
             <h4>Adhésion</h4>
             <div class="conteneur-sections">
-                <section class="table-section">
+                <section class="table-section" id="abonnement_theme">
                     <p class="sur"><strong>Total : 22,00 €</strong></p>
                     <table>
                         <thead>
