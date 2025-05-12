@@ -30,14 +30,12 @@ class Vue {
 		}
 
 		const data: Array<UneSalle> = [
-			{ num: 101, date: "2023-01-01", Adherent: "Jean Dupont", CSP: "Actif", Adhésion: "2023-01-01", Montant: 100},
+			{ num: 101, date: "2023-01-01", Adherent: "Jean Dupont", CSP: "Actif", Adhésion: "2023-01-01", Montant: 100 },
 			{ num: 202, date: "2023-01-01", Adherent: "Jean Dupont", CSP: "Actif", Adhésion: "2023-01-01", Montant: 100 },
 			{ num: 303, date: "2023-01-01", Adherent: "Jean Dupont", CSP: "Actif", Adhésion: "2023-01-01", Montant: 100 }
 		];
 
-		for (let num in data) {
-			const uneSalle : UneSalle = data[num];
-
+		for (let uneSalle of data) {
 			const tr = this.form.tableAbonnement.insertRow();
 			tr.insertCell().textContent = uneSalle.num.toString();
 			tr.insertCell().textContent = uneSalle.date;
@@ -45,7 +43,8 @@ class Vue {
 			tr.insertCell().textContent = uneSalle.CSP;
 			tr.insertCell().textContent = uneSalle.Adhésion;
 			tr.insertCell().textContent = uneSalle.Montant.toString();
-			tr.onclick  = function():void { vue.selectionLigne(tr.rowIndex , uneSalle.num.toString()); }		
+		
+			tr.onclick = () => this.selectionLigne(tr.rowIndex, uneSalle.num.toString());
 		}
 
 		this.form.btnAjouter.onclick = () => window.location.href = '../vue/creation.html';
@@ -61,18 +60,20 @@ class Vue {
 		};
 		this.form.btnSupprimer.onclick = () => {
 			if (this.idSelect !== '') {
-				alert(`Supprimer l’abonnement n°${this.idSelect} (action à définir).`);
+				alert(`Supprimer l’abonnement n°${this.idSelect} ?`);
+				this.form.tableAbonnement.deleteRow(this.noLigne);
 			}
 		};
 	}
 
 	selectionLigne(noLigne: number, id: string): void {
-		if (this.idSelect !== '') {
-			this.form.tableAbonnement.rows[this.noLigne + 1].style.backgroundColor = '#ffffff'; // +1 à cause du thead
+		if (this.idSelect !== '') {	
+			this.form.tableAbonnement.rows[this.noLigne].style.backgroundColor = '#ffffff'; // +1 à cause du thead
 		}
 		this._idSelect = id;
 		this._noLigne = noLigne;
-		this.form.tableAbonnement.rows[noLigne + 1].style.backgroundColor = '#78c8ff';
+		console.log(this._noLigne);
+		this.form.tableAbonnement.rows[noLigne].style.backgroundColor = '#78c8ff';
 	}
 }
 
