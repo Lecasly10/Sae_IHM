@@ -1,4 +1,4 @@
-//surement type equipement 
+//surement 
 
 export class CSP {
     private csp_num : number; // entre 1 et 5chars
