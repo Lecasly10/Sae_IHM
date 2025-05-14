@@ -95,6 +95,7 @@ class LesAbonnements{
                 item['adh_num']
             );
             Abonnements[Abonnement.numAbonnement] = Abonnement;
+            // on utilise le numéro d’abonnement comme clé
         }
         return Abonnements;
     }
