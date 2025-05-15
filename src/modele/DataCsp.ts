@@ -1,4 +1,3 @@
-//a modifier peut etre plutot en Type Equipement
 import { connexion, APIsql } from "./connexion";
 class UnCSP {
     private _csp_num : number; // entre 1 et 5chars
@@ -53,7 +52,7 @@ class LesCSP {
         for (let i = 0; i < result.length; i++) {
             const item: APIsql.TtabAsso = result[i];
             const unCSP = new UnCSP(
-                Number(item['csp_num']), 
+                parseInt(item['csp_num']), 
                 item['csp_lib']);
             CSP[unCSP.csp_num] = unCSP;
         }
@@ -70,6 +69,11 @@ class LesCSP {
         sql += " ORDER BY csp_num ASC ";
         return sql;
     }
+
+    all() : TCSP
+        {
+            return this.load(APIsql.sqlWeb.SQLloadData(this.prepare(""),[]));
+        }
 
     byNum(num: string): UnCSP
     {
@@ -89,5 +93,11 @@ class LesCSP {
         }
         return T;
     }
+
+    //delete
+
+    //update
+
+    //insert
 }
 export{ connexion, UnCSP, LesCSP, TCSP };

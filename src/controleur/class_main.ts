@@ -1,3 +1,5 @@
+import { UnAbonnement, LesAbonnements } from "../modele/DataAbonnement";
+
 type TMainForm = { 
 	btnAjouter      		: HTMLInputElement,
 	btnModifier     		: HTMLInputElement,
@@ -8,7 +10,7 @@ type TMainForm = {
 	abonnement_theme		: HTMLInputElement,
 }
 
-interface UneSalle {
+interface UneSalle { // a quoi ca sert ?
 	num: number;
 	date: string;
 	Adherent: string;
@@ -21,7 +23,7 @@ class Vue {
 	private _form: TMainForm;
 	private _idSelect: string;
 	private _noLigne: number;
-	private _data: Array<UneSalle>;
+	private _dataAbo: Array<UneSalle>;
 
 	get form(): TMainForm { return this._form }
 	get idSelect(): string { return this._idSelect }
@@ -29,16 +31,37 @@ class Vue {
 
 	
 	init(form: TMainForm): void {
-		this._idSelect = '';
 		this._form = form;
-	
-		this._data = [
+		const lesAbonnements = new LesAbonnements();
+		const dataAbo = lesAbonnements.all();
+		this._idSelect = '';
+		
+		for (let num in dataAbo)
+		{
+			const unAbonnement : UnAbonnement= dataAbo[num];
+			const tr = this.form.tableAbonnement.insertRow();
+
+			let balisea : HTMLAnchorElement;
+			balisea = document.createElement("a");
+			
+			tr.insertCell().appendChild(balisea);
+			tr.insertCell().textContent = unAbonnement.numAbonnement.toString();
+			tr.insertCell().textContent = unAbonnement.dateAbonnement.toString();
+			tr.insertCell().textContent = unAbonnement.commentAbonnement;
+			tr.insertCell().textContent = unAbonnement.adhé_numAbonnement.toString();
+			tr.insertCell().textContent = unAbonnement.numAbonnement.toString();
+			tr.insertCell().textContent = unAbonnement.numAbonnement.toString();
+		};
+		
+
+		/*
+		this._dataAbo = [
 			{ num: 101, date: "2023-01-01", Adherent: "Jean Dupont", CSP: "Actif", Adhésion: 3, Montant: 100 },
 			{ num: 202, date: "2023-01-01", Adherent: "Jean Dupont", CSP: "Actif", Adhésion: 2, Montant: 100 },
 			{ num: 303, date: "2023-01-01", Adherent: "Jean Dupont", CSP: "Actif", Adhésion: 5, Montant: 100 }
 		];
-	
-		for (let uneSalle of this._data) {
+		*/
+		for (let uneSalle of this._dataAbo) {
 			const tr = this.form.tableAbonnement.insertRow();
 			tr.insertCell().textContent = uneSalle.num.toString();
 			tr.insertCell().textContent = uneSalle.date;

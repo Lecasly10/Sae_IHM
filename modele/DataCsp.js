@@ -55,6 +55,9 @@ class LesCSP {
         sql += " ORDER BY csp_num ASC ";
         return sql;
     }
+    all() {
+        return this.load(APIsql.sqlWeb.SQLloadData(this.prepare(""), []));
+    }
     byNum(num) {
         let csp = new UnCSP;
         const cps = this.load(APIsql.sqlWeb.SQLloadData(this.prepare("csp_num = ?"), [num]));

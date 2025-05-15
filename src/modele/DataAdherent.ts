@@ -1,6 +1,4 @@
-//département je pense
-
-import { APIsql } from "../modele/connexion.js";
+import {connexion, APIsql } from "../modele/connexion.js";
 class UnAdhérent 
 {
     private _adh_num : number; // >0   
@@ -8,12 +6,12 @@ class UnAdhérent
     private _adh_nom : string; // peut etre vide mais limie à 50chars
     private _adh_prenom : string; // peut etre vide mais limie à 50chars
     private _adh_adr : string; // peut etre vide mais limie à 50chars
-    private _adh_cp : string; // peut etre vide mais limie à 5chars
+    private _adh_cp : number; // peut etre vide mais limie à 5chars
     private _adh_ville : string; // peut etre vide mais limie à 30chars
     private _adh_mel : string; // peut etre vide mais limie à 50chars et respecter le format
     private _csp_num : number; // entre 1 et 5chars
 
-    constructor(numAdh: number = 0, civi : string = "", nomAdhé: string = "", prenomAdhé: string = "", adrAdhé: string = "", cpAdhé: string = "", villeAdhé: string = "", melAdhé: string = "", csp_numAdhé: number = 0) {
+    constructor(numAdh: number = 0, civi : string = "", nomAdhé: string = "", prenomAdhé: string = "", adrAdhé: string = "", cpAdhé: number = 0, villeAdhé: string = "", melAdhé: string = "", csp_numAdhé: number = 0) {
         this._adh_num = numAdh;
         this._adh_civ = civi;
         this._adh_nom = nomAdhé;
@@ -80,12 +78,15 @@ class UnAdhérent
         this._adh_ville = _adh_ville;
     }
 
-    get _adh_cpAdhé(): string {
+    get _adh_cpAdhé(): number {
         return this._adh_cp;
     }
 
-    set _adh_cpAdhé(_adh_cp: string) {
-        if (_adh_cp.length > 5) {
+    set _adh_cpAdhé(_adh_cp: number) {
+        if (_adh_cp <= 0) {
+            throw new Error("Le code postal doit être supérieur à 0");
+        }
+        if (_adh_cp.toString().length > 5) {
             throw new Error("Le code postal ne peut pas dépasser 5 caractères");
         }
         this._adh_cp = _adh_cp;
@@ -127,7 +128,7 @@ class UnAdhérent
             'adh_nom':this._adh_nom,
             'adh_prenom':this._adh_prenom,
             'adh_adr':this._adh_adr,
-            'adh_cp':this._adh_cp,
+            'adh_cp':this._adh_cp.toString(),
             'adh_ville':this._adh_ville,
             'adh_mel':this._adh_mel,
             'csp_num':this._csp_num.toString()
@@ -143,7 +144,7 @@ class LesAdhérents{
     {
     }
 
-    private load(result: APIsql.TtabAsso[]): Tadherent
+    private load(result: APIsql.TdataSet): Tadherent
     {
         const Adherents: Tadherent = {};
         for (let i = 0; i < result.length; i++) 
@@ -151,15 +152,15 @@ class LesAdhérents{
             const item:APIsql.TtabAsso = result[i];
             const Adherent = new UnAdhérent
             (
-                parseInt(item.adh_num),
-                item.adh_civ,
-                item.adh_nom,
-                item.adh_prenom,
-                item.adh_adr,
-                item.adh_cp,
-                item.adh_ville,
-                item.adh_mel,
-                parseInt(item.csp_num)
+                parseInt(item['adh_num']),
+                item['adh_civ'],
+                item['adh_nom'],
+                item['adh_prenom'],
+                item['adh_adr'],
+                parseInt(item['adh_cp']),
+                item['adh_ville'],
+                item['adh_mel'],
+                parseInt(item['csp_num'])
             );
             Adherents[item.adh_num] = Adherent; // affecte l’objet « Adherent » dans le tableau associatif « Adherents »
         }
@@ -206,5 +207,13 @@ class LesAdhérents{
             }
             return T;
         }
+
+        //delete 
+
+        //insert
+
+        //update
+
+        //getNombreAdhesions
 }
-export { UnAdhérent, LesAdhérents };
+export {connexion, UnAdhérent, LesAdhérents, Tadherent };

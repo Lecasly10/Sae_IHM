@@ -1,6 +1,4 @@
-//adhesion = contient 
-
-import { APIsql } from "./connexion.js";
+import {connexion, APIsql } from "./connexion.js";
 class UneAdhésion {
     private abon_num : number; // >0
     private theme_num : number; // >0
@@ -18,7 +16,7 @@ class UneAdhésion {
 
     set abon_numAdhé(nom: number) {
         if (nom <= 0) {
-            throw new Error("Le numéro d'abonnement doit être supérieur à 0\n");
+            throw new Error("Le numéro d'Adh doit être supérieur à 0\n");
         }  // il faudrait verifier quil est pas deja attribué
         this.abon_num = nom;
     }
@@ -62,29 +60,28 @@ class LesAdhésions {
     constructor() {
     }
 
-    private load(result: APIsql.TdataSet): TAdhésion 
+    private load(result: APIsql.TdataSet): TAdhésion
     {
-        let lesAdhésions: TAdhésion = {};
+        const Adhesion: TAdhésion = {};
         for (let i = 0; i < result.length; i++) 
         {
-            /*const item.APIsql.TtabAsso = result[i];
-            const Adhes = new UneAdhésion
+            const item:APIsql.TtabAsso = result[i];
+            const Adh = new UneAdhésion
             (
-                item.['abon_num'], 
-                item.['theme_num'],
-                item.['envoi_papier']
+                parseInt(item['abon_num']),  
+                parseInt(item['theme_num']), 
+                item['envoi_papier'] === "true" ? true : false //maybe parseint ici
             );
-            Adhes[Adhes.abon_num] = Adhes;
-            */
+            Adhesion[Adh.abon_numAdhé] = Adh;
         }
-        return lesAdhésions;
+        return Adhesion;
     }
 
     private prepare(where:string): string
     {
         // renvoie une chaîne de caractères contenant la requête SQL
         // pour récupérer les adhésions
-        let sql = "SELECT abon_num, theme_num, envoi_papier FROM adhésion";
+        let sql = "SELECT abon_num, theme_num, envoi_papier FROM adhesion";
         if (where.trim() !== "") 
         {
             sql += " WHERE " + where;
@@ -98,7 +95,7 @@ class LesAdhésions {
         return this.load(APIsql.sqlWeb.SQLloadData(this.prepare(""),[]));
     }
 
-    /*byAbon(abon_num: number) : TAdhésion
+    byAbon(abon_num: number) : UneAdhésion
     {
         let Adhesion = new UneAdhésion;
         const Adhesions : TAdhésion = this.load(APIsql.sqlWeb.SQLloadData
@@ -109,7 +106,7 @@ class LesAdhésions {
             Adhesion = Adhesions[LesCles[0]];
         }
         return Adhesion;
-    }*/
+    }
 
     toArray(adhésions: TAdhésion): APIsql.TdataSet
     {
@@ -122,6 +119,12 @@ class LesAdhésions {
         }
         return tableau;
     }
+
+    //delete 
+
+    //insert
+
+    //update
 }
 
 const lesAdhésions = new LesAdhésions();
@@ -149,4 +152,4 @@ class UneAdhésionAbon {
 }
 
 const UneAdhésionAbons = new UneAdhésionAbon();
-export { UneAdhésion, LesAdhésions, UneAdhésionAbon, UneAdhésionAbons, lesAdhésions };
+export {connexion, UneAdhésion, LesAdhésions, UneAdhésionAbon, UneAdhésionAbons, lesAdhésions };

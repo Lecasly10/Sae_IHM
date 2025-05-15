@@ -1,6 +1,4 @@
-//type equipement
-
-import { APIsql } from "./connexion.js";
+import {connexion, APIsql } from "./connexion.js";
 class UnTheme {
     private _theme_num : number; // >0
     private _theme_lib : string; // entre 2 et 20chars
@@ -113,6 +111,8 @@ class LesThemes { // définition de la classe gérant les données de la table T
     }
 }
 
+//a partir d'ici c'est different 
+
 class UnThemeByAdhesion {
     private _unTheme: UnTheme;
     private _theme_tarif: number;
@@ -218,4 +218,4 @@ class LesThemesByAdhesion { // définition de la classe gérant les données de 
         return APIsql.sqlWeb.SQLexec(sql, []);
     }
 }
-export { UnTheme, TTheme, LesThemes, UnThemeByAdhesion, TThemeByAdhesion, LesThemesByAdhesion };
+export {connexion, UnTheme, TTheme, LesThemes, UnThemeByAdhesion, TThemeByAdhesion, LesThemesByAdhesion };

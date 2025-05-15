@@ -11,7 +11,7 @@ class UneAdhésion {
     }
     set abon_numAdhé(nom) {
         if (nom <= 0) {
-            throw new Error("Le numéro d'abonnement doit être supérieur à 0\n");
+            throw new Error("Le numéro d'Adh doit être supérieur à 0\n");
         } // il faudrait verifier quil est pas deja attribué
         this.abon_num = nom;
     }
@@ -45,19 +45,16 @@ class LesAdhésions {
     constructor() {
     }
     load(result) {
-        let lesAdhésions = {};
+        const Adhesion = {};
         for (let i = 0; i < result.length; i++) {
-            /*const item.APIsql.TtabAsso = result[i];
-            const Adhes = new UneAdhésion
-            (
-                item.['abon_num'],
-                item.['theme_num'],
-                item.['envoi_papier']
-            );
-            Adhes[Adhes.abon_num] = Adhes;
-            */
+            const item = result[i];
+            const Adh = new UneAdhésion(Number(item['abon_num']), //ici ca peut bug 
+            Number(item['theme_num']), //je sais pas pourquoi ya un new ici mais si il est pas la ca bug
+            item['envoi_papier'] === "true" ? true : false);
+            Adhesion[Adh.abon_numAdhé] = Adh; // ici on met l'adhesion dans le tableau
+            // on utilise le numéro d’Adh comme clé
         }
-        return lesAdhésions;
+        return Adhesion;
     }
     prepare(where) {
         // renvoie une chaîne de caractères contenant la requête SQL

@@ -1,7 +1,5 @@
-//relation maitre je pense
-//salle je pense
-
 import { connexion, APIsql } from "../modele/connexion.js";
+
 class UnAbonnement {
     private _abon_num : number; // > 0
     private _abon_date : Date; // <= date du jour
@@ -66,7 +64,7 @@ class UnAbonnement {
         // pour un affichage dans une ligne d’un tableau HTML
         let tableau : APIsql.TtabAsso = 
         {   'abon_num':this._abon_num.toString(),
-            'abon_date':this._abon_date.toString(),
+            'abon_date':this._abon_date.toString(), //maybe toISOString().split("T")[0] ?
             'abon_comment':this._abon_comment,
             'adh_num':this._adh_num.toString() 
         };
@@ -81,7 +79,9 @@ class LesAbonnements{
     {
     }
 
-    private load(result: APIsql.TtabAsso[]): TAbonnement
+    //abo existe ?
+
+    private load(result: APIsql.TdataSet): TAbonnement
     {
         const Abonnements: TAbonnement = {};
         for (let i = 0; i < result.length; i++) 
@@ -89,10 +89,10 @@ class LesAbonnements{
             const item:APIsql.TtabAsso = result[i];
             const Abonnement = new UnAbonnement
             (
-                Number(item['abon_num']),   //ici ca peut bug 
+                parseInt(item['abon_num']),   //ici ca peut bug 
                 new Date(item['abon_date']), //je sais pas pourquoi ya un new ici mais si il est pas la ca bug
                 item['abon_comment'],
-                item['adh_num']
+                item['adh_num'] //maybe parseInt(item['adh_num']) ?
             );
             Abonnements[Abonnement.numAbonnement] = Abonnement;
             // on utilise le numéro d’abonnement comme clé
@@ -169,7 +169,7 @@ class LesAbonnements{
         return APIsql.sqlWeb.SQLexec(sql,[abon.dateAbonnement.toString(), abon.commentAbonnement, abon.adhé_numAbonnement.toString(), abon.numAbonnement.toString()]);
     }
 
+    //montant total des abonnements
 }
 
-export {connexion, UnAbonnement, LesAbonnements}
-export type {TAbonnement}
+export {connexion, UnAbonnement, LesAbonnements, TAbonnement}
