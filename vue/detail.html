@@ -20,9 +20,15 @@
             <h4>ADHERENT</h4>
             <label>Numéro <input type="text" value="2" id="num_ad" readonly></label>
             <div class="adherent-info">
-                <p><strong>Adhérent :</strong> Mme CREZINA Albertine</p>
-                <p>al.crezina@free.fr<br>37 avenue Carnaval<br>54000 Nancy</p>
-                <p><strong>Catégorie SocioProfessionnelle</strong><br>Professeurs des écoles, instituteurs et assimilés</p>
+                <label><strong>Adhérent :</strong> <span id="nom">0</span><br>
+                    <span id="email">0</span><br>
+                    <span id="adresse">0</span><br>
+                    <span id="codeVille">0</span><br>
+                </label><br>
+
+                <label><strong>Catégorie SocioProfessionnelle</strong><br>
+                    <span id="categorie">0</span>
+                </label>
             </div>
         </section>
 
@@ -30,7 +36,7 @@
             <h4>Adhésion</h4>
             <div class="conteneur-sections">
                 <section class="table-section">
-                    <p class="sur"><strong>Total : 22,00 €</strong></p>
+                    <label class="sur">Total : <span id="total">0</span></label>
                     <table>
                         <thead>
                             <tr>

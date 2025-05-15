@@ -1,12 +1,17 @@
-import { vue } from "./class_detail";
+import { vueDetail } from "./class_detail";
 
-vue.init (
+vueDetail.init (
     {
-        btnDetail               :       document.querySelector('[id=btnDetail]'),
-        btnAjouter              :       document.querySelector('[id=btnAjouter]'),
-        btnSupprimer            :       document.querySelector('[id=btnSupprimer]'),
-        btnModifier             :       document.querySelector('[id=btnModifier]'),
-        btnRetour               :       document.querySelector('[id=btnRetour]'),
-        tableAbonnement         :       document.querySelector('[id=table]'),
-        abonnement_theme		:       document.querySelector('[id=abonnement_theme]'),
+        btnRetour       		: document.querySelector('[id=btnRetour]'),
+        num_adhé 				: document.querySelector('[id=num_adhé]'),
+        date_adhé 				: document.querySelector('[id=date_adhé]'),
+        comm					: document.querySelector('[id=comm]'),
+        num_ad					: document.querySelector('[id=num_ad]'),
+        table_abo			   	: document.querySelector('[id=table_abo]'),
+        total                   : document.querySelector('[id=total]'),
+        email                  : document.querySelector('[id=email]'),
+        adresse                : document.querySelector('[id=adresse]'),
+        codeVille              : document.querySelector('[id=codeVille]'),
+        categorie              : document.querySelector('[id=categorie]'),
+        nom                    : document.querySelector('[id=nom]'),
     } );

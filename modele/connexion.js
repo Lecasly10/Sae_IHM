@@ -1,5 +1,5 @@
 import * as APIsql from "../modele/sqlWeb.js";
-APIsql.sqlWeb.init("https://devweb.iutmetz.univ-lorraine.fr/~lupo9u/ihm/dossier_application/vue/", "https://devweb.iutmetz.univ-lorraine.fr/~nitschke5/ihm/IHM_API/");
+APIsql.sqlWeb.init("https://devweb.iutmetz.univ-lorraine.fr/~e93786u/sae/vue/", "https://devweb.iutmetz.univ-lorraine.fr/~nitschke5/ihm/IHM_API/");
 class Connexion {
     constructor() {
         this.init();
