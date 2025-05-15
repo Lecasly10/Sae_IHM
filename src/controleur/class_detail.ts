@@ -41,19 +41,13 @@ interface infos {
 
 class VueDetail {
 	private _form: TDetailForm;
-	private _idSelect: string;
-	private _noLigne: number;
 	private _abos: Array<Abo>;
     private _data: Array<UneSalle>;
     private _infos: Array<infos>;
 
 	get form(): TDetailForm { return this._form }
-	get idSelect(): string { return this._idSelect }
-	get noLigne(): number { return this._noLigne }
-
 	
 	init(form: TDetailForm): void {
-		this._idSelect = '';
 		this._form = form;
 
         this._infos = [

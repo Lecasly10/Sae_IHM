@@ -2,27 +2,33 @@
 <html lang = "fr">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <title>Modification abonnement</title>
+        <title>Détail abonnement</title>
         <link type="text/css" rel="stylesheet" href="./css/main.css">
     </head>
     <body>
         <h3>Modification d'un abonnement</h3>
         <section class="section">
             <h4>IDENTIFICATION</h4>
-            <label>Numéro <input type="text" value="1"></label>
-            <label>Le <input type="date" value="2022-04-03"></label>
+            <label>Numéro <input type="text" value="1" id="num_adhé"></label>
+            <label>Le <input type="date" value="2022-04-03" id="date_adhé"></label>
             <label>Commentaire<br>
-                <textarea rows="2">ne souhaite pas une relance à la fin de son abonnement</textarea>
+                <textarea rows="2" id="comm">ne souhaite pas une relance à la fin de son abonnement</textarea>
             </label>
         </section>
 
         <section class="section">
             <h4>ADHERENT</h4>
-            <label>Numéro <input type="text" value="2"></label>
+            <label>Numéro <input type="text" value="2" id="num_ad"></label>
             <div class="adherent-info">
-                <p><strong>Adhérent :</strong> Mme CREZINA Albertine</p>
-                <p>al.crezina@free.fr<br>37 avenue Carnaval<br>54000 Nancy</p>
-                <p><strong>Catégorie SocioProfessionnelle</strong><br>Professeurs des écoles, instituteurs et assimilés</p>
+                <label><strong>Adhérent :</strong> <span id="nom">0</span><br>
+                    <span id="email">0</span><br>
+                    <span id="adresse">0</span><br>
+                    <span id="codeVille">0</span><br>
+                </label><br>
+
+                <label><strong>Catégorie SocioProfessionnelle</strong><br>
+                    <span id="categorie">0</span>
+                </label>
             </div>
         </section>
 
@@ -30,23 +36,14 @@
             <h4>Adhésion</h4>
             <div class="conteneur-sections">
                 <section class="table-section">
-                    <p class="sur"><strong>Total : 22,00 €</strong></p>
+                    <label class="sur">Total : <span id="total">0</span></label>
                     <table>
                         <thead>
-                        <tr>
-                            <th>Libellé</th><th>Tarif de base</th><th>Version Papier</th><th>Montant</th>
-                        </tr>
+                            <tr>
+                                <th>Libellé</th><th>Tarif de base</th><th>Version Papier</th><th>Montant</th>
+                            </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td>science fiction</td><td>5.00</td><td>O</td><td>10,00</td>
-                        </tr>
-                        <tr>
-                            <td>bande dessinée</td><td>0.00</td><td>N</td><td>4,00</td>
-                        </tr>
-                        <tr>
-                            <td>humour</td><td>8.00</td><td>N</td><td>8,00</td>
-                        </tr>
+                        <tbody id ="table_abo">
                         </tbody>
                     </table>
                     <div class="divaction">
@@ -56,38 +53,33 @@
                     </div>
                 </section>
                 <section class="table-section" id="abonnement_theme_edit">
-                    <p class="sur"><strong>Total : 22,00 €</strong></p>
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Libellé</th><th>Tarif de base</th><th>Version Papier</th><th>Montant</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>science fiction</td><td>5.00</td><td>O</td><td>10,00</td>
-                        </tr>
-                        <tr>
-                            <td>bande dessinée</td><td>0.00</td><td>N</td><td>4,00</td>
-                        </tr>
-                        <tr>
-                            <td>humour</td><td>8.00</td><td>N</td><td>8,00</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div>
+                        <label class="select-label sur">Choisir un thème dans la liste</label>
+                        <div class="form-content table-section">
+                            <select size="5" class="theme-select" id="theme">
+                            </select>
+                        </div>
+                        <div class="options table-section">
+                            <label for="papier">version papier</label>
+                            <input type="checkbox" id="papier" checked />
+                            <div class="buttons">
+                                <button class="btn validate" id="btnValidModif">
+                                    <img src="./css/valider.jpg" alt="Valider" />
+                                </button>
+                                <button class="btn cancel" id="btnAnnulModif">
+                                    <img src="./css/annuler.jpg" alt="Annuler" />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </div>
         </section>
 
-        <div class="footer">
+         <div class="footer">
             <input id="btnValider" type="button" value="Valider">
             <input id="btnRetour" type="button" value="Annuler">
         </div>
-        <script type="module" src="../controleur/main.js"></script>
-        <script>
-            document.getElementById('btnRetour').addEventListener('click', function() {
-                window.location.href = 'main.html';
-            });
-        </script>
+        <script type="module" src="../controleur/modif.js"></script>
     </body>
 </html>

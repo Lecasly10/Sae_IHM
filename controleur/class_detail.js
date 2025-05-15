@@ -1,10 +1,7 @@
 ;
 class VueDetail {
     get form() { return this._form; }
-    get idSelect() { return this._idSelect; }
-    get noLigne() { return this._noLigne; }
     init(form) {
-        this._idSelect = '';
         this._form = form;
         this._infos = [
             { nom: "M. DUPONT Jean", email: "jean.dupont@example.com", adresse: "12 rue de l'Exemple", codeVille: "75001 Paris", categorie: "Cadres administratifs et commerciaux" },
