@@ -1,6 +1,6 @@
 //adhesion = contient 
 
-import { APIsql } from "../../modele/connexion.js";
+import { APIsql } from "./connexion.js";
 class UneAdhésion {
     private abon_num : number; // >0
     private theme_num : number; // >0

@@ -1,7 +1,7 @@
 //relation maitre je pense
 //salle je pense
 
-import { connexion, APIsql } from "../../modele/connexion.js";
+import { connexion, APIsql } from "../modele/connexion.js";
 class UnAbonnement {
     private _abon_num : number; // > 0
     private _abon_date : Date; // <= date du jour
@@ -95,6 +95,7 @@ class LesAbonnements{
                 item['adh_num']
             );
             Abonnements[Abonnement.numAbonnement] = Abonnement;
+            // on utilise le numéro d’abonnement comme clé
         }
         return Abonnements;
     }

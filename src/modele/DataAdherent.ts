@@ -1,6 +1,6 @@
 //département je pense
 
-import { APIsql } from "../../modele/connexion.js";
+import { APIsql } from "../modele/connexion.js";
 class UnAdhérent 
 {
     private _adh_num : number; // >0   
