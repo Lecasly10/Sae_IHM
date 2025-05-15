@@ -59,7 +59,6 @@ class VueDetail {
             tr.insertCell().textContent = abo.montant.toString();
         }
 	
-		// Gestion des boutons
 		this.form.btnRetour.onclick = () => window.location.href = './main.html';
 
         const params = new URLSearchParams(window.location.search);
