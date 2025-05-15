@@ -6,10 +6,6 @@ type TMainForm = {
     btnRetour       		: HTMLInputElement,
 	tableAbonnement 		: HTMLTableElement,
 	abonnement_theme		: HTMLInputElement,
-	num_adhé 				: HTMLInputElement,
-	date_adhé 				: HTMLInputElement,
-	comm					: HTMLInputElement,
-	num_ad					: HTMLInputElement,
 }
 
 interface UneSalle {
@@ -33,7 +29,6 @@ class Vue {
 
 	
 	init(form: TMainForm): void {
-		console.log("URL actuelle :", window.location.href);
 		this._idSelect = '';
 		this._form = form;
 	
@@ -43,7 +38,6 @@ class Vue {
 			{ num: 303, date: "2023-01-01", Adherent: "Jean Dupont", CSP: "Actif", Adhésion: 5, Montant: 100 }
 		];
 	
-		// Remplissage du tableau
 		for (let uneSalle of this._data) {
 			const tr = this.form.tableAbonnement.insertRow();
 			tr.insertCell().textContent = uneSalle.num.toString();
@@ -74,14 +68,8 @@ class Vue {
 	}
 
 	detail(index:number): void {
-		if (this.idSelect !== '') {
-			/*this.form.num_adhé.value = this._data[this.noLigne].num.toString();
-			this.form.date_adhé.value = this._data[this.noLigne].date;
-			this.form.comm.value = "Commentaire"; // à adapter
-			this.form.num_ad.value = "Numéro adhérent"; // à adapter
-			console.log(this.form.num_adhé.value + " " + this.form.date_adhé.value);*/
+		if (this.idSelect !== '')
 			window.location.href = "../vue/detail.html?index=" + encodeURIComponent(index.toString());
-		}
 	}
 	supprimerLigne(): void {
 		if (this.idSelect !== '') {

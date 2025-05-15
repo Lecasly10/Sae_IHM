@@ -11,7 +11,11 @@ class Vue {
             { num: 202, date: "2023-01-01", Adherent: "Jean Dupont", CSP: "Actif", Adhésion: 2, Montant: 100 },
             { num: 303, date: "2023-01-01", Adherent: "Jean Dupont", CSP: "Actif", Adhésion: 5, Montant: 100 }
         ];
-        // Remplissage du tableau
+        this._abos = [
+            { lib: "1", tarif_base: 100, Version: "Version 1", montant: 100 },
+            { lib: "2", tarif_base: 200, Version: "Version 2", montant: 200 },
+            { lib: "3", tarif_base: 300, Version: "Version 3", montant: 300 },
+        ];
         for (let uneSalle of this._data) {
             const tr = this.form.tableAbonnement.insertRow();
             tr.insertCell().textContent = uneSalle.num.toString();
@@ -21,6 +25,14 @@ class Vue {
             tr.insertCell().textContent = uneSalle.Adhésion.toString();
             tr.insertCell().textContent = uneSalle.Montant.toString();
             tr.onclick = () => this.selectionLigne(tr.rowIndex, uneSalle.num.toString());
+        }
+        for (let abo of this._abos) {
+            const tr = this.form.table_abo.insertRow();
+            tr.insertCell().textContent = abo.lib.toString();
+            tr.insertCell().textContent = abo.tarif_base.toString();
+            tr.insertCell().textContent = abo.Version;
+            tr.insertCell().textContent = abo.montant.toString();
+            tr.onclick = () => this.selectionLigne(tr.rowIndex, abo.lib);
         }
         // Gestion des boutons
         this.form.btnAjouter.onclick = () => window.location.href = '../vue/creation.html';
@@ -35,14 +47,8 @@ class Vue {
         this.form.btnSupprimer.onclick = () => function () { vue.supprimerLigne(); };
     }
     detail(index) {
-        if (this.idSelect !== '') {
-            /*this.form.num_adhé.value = this._data[this.noLigne].num.toString();
-            this.form.date_adhé.value = this._data[this.noLigne].date;
-            this.form.comm.value = "Commentaire"; // à adapter
-            this.form.num_ad.value = "Numéro adhérent"; // à adapter
-            console.log(this.form.num_adhé.value + " " + this.form.date_adhé.value);*/
+        if (this.idSelect !== '')
             window.location.href = "../vue/detail.html?index=" + encodeURIComponent(index.toString());
-        }
     }
     supprimerLigne() {
         if (this.idSelect !== '') {

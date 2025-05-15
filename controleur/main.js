@@ -11,5 +11,6 @@ vue.init({
     date_adhé: document.querySelector('[id=date_adhé]'),
     comm: document.querySelector('[id=comm]'),
     num_ad: document.querySelector('[id=num_ad]'),
+    table_abo: document.querySelector('[id=table_abo]'),
 });
 //# sourceMappingURL=main.js.map
