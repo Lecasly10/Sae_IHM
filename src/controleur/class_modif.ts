@@ -48,7 +48,7 @@ interface infos { // à enlever
     categorie: string
 };
 
-const themes = [
+const themes = [ // à enlever
   "science fiction",
   "bande dessinée",
   "humour",
@@ -136,24 +136,24 @@ class VueModif {
         this.form.total.textContent = tot.toString();
 
 
-        this.form.abonnement_theme_edit.hidden = true;
+        this.form.abonnement_theme_edit.hidden = true; // cache le formulaire d'ajout d'abonnement
 
-        this.form.btnRetour.onclick = () => vueModif.retour();
+        this.form.btnRetour.onclick = () => vueModif.retour(); //retour à la page principale
 
-        this.form.btnvalider.onclick = () => vueModif.testValide();
+        this.form.btnvalider.onclick = () => vueModif.testValide(); //valide les infos de l'adhérent
 
-        this.form.btnSupprimerAdhe.onclick = () => vueModif.supprimer();
+        this.form.btnSupprimerAdhe.onclick = () => vueModif.supprimer(); //supprime l'abonnement
 
-        this.form.btnModifierAdhe.onclick = () => vueModif.modifier();
+        this.form.btnModifierAdhe.onclick = () => vueModif.modifier(); //affiche la zone de modif l'abonnement quand on appuie sur modifier
 
-        this.form.btnAjouterAdhe.onclick = () => vueModif.ajouter();
+        this.form.btnAjouterAdhe.onclick = () => vueModif.affich(this.noLigne, 2); //affiche la zone d'ajout d'abonnement quand on appuie sur ajouter 
 
-        this.form.btnValidModif.onclick = () => vueModif.validerModif();
+        this.form.btnValidModif.onclick = () => vueModif.validerModif(); //valide la modification / ajout quand on appuie sur ✅​
         
-        this.form.btnAnnulModif.onclick = () => vueModif.annuler("annuler");
+        this.form.btnAnnulModif.onclick = () => vueModif.annuler("annuler"); //annule la modification / ajout quand on appuie sur ❌​
 	}
 
-    affich(noLigne: number, ver: number): void {
+    affich(noLigne: number, ver: number): void { //affiche la zone d'ajout d'abonnement
         if (ver === 1) {
             const option = document.createElement("option");
             option.value = this._abos[this.noLigne-1].lib;
@@ -173,12 +173,12 @@ class VueModif {
         this.form.abonnement_theme_edit.hidden = false;
     }
 
-    validerModif(): void {
+    validerModif(): void { //valide la modification / ajout
         let version :string;
         let lib :string;
 
         version = this.form.papier.checked ? "O" : "N";
-        if (this.form.theme.options.length > 1) {
+        if (this.form.theme.options.length > 1) { //verifie si on est en mode ajout
             if (this.form.theme.selectedIndex === -1) {
                 alert("Sélectionner un abonnement");
                 return;
@@ -190,21 +190,21 @@ class VueModif {
             tr.insertCell().textContent = version;
             tr.insertCell().textContent = "200";
             tr.onclick = () => this.selectionLigne(tr.rowIndex, this._abos[this.noLigne-1].num.toString());
-        } else {
+        } else { //si on modifie un abonnement
             const row = this.form.table_abo.rows[this.noLigne - 1];
             row.cells[2].textContent = version;
         }
         vueModif.annuler("valider");
     }
 
-    annuler(s:string): void {
+    annuler(s:string): void { //annule la modification / ajout + cache la zone d'ajout d'abonnement
         this.form.abonnement_theme_edit.hidden = true;
         this.form.theme.options.length = 0;
         vueModif.update();
         console.log(s);
     }
 
-    selectionLigne(noLigne: number, id: string): void {
+    selectionLigne(noLigne: number, id: string): void { //selectionne la ligne du tableau
 		if (this.idSelect !== '') {	
 			this.form.table_abo.rows[this.noLigne-1].style.backgroundColor = '#ffffff'; // +1 à cause du thead
 		}
@@ -213,21 +213,21 @@ class VueModif {
 		this.form.table_abo.rows[noLigne-1].style.backgroundColor = '#78c8ff';
 	}
 
-    retour(): void {
+    retour(): void { //retour vers la page principale
         window.location.href = '../vue/main.html';
     }
 
-    testValide(): void {
+    testValide(): void { //valide les infos de l'adhérent
         console.log("testValide");
-        if (this.form.num_adhé.value === '') {
+        if (this.form.num_adhé.value === '') { //test si le numéro d'adhésion est vide
             alert("Numéro d'adhésion vide");
             return;
         }
-        if (this.form.date_adhé.value === '') {
+        if (this.form.date_adhé.value === '') { //test si la date d'adhésion est vide
             alert("Date d'adhérent vide");
             return;
         }
-        if (this.form.num_ad.value === '') {
+        if (this.form.num_ad.value === '') { //test si le numéro d'adhérent est vide
             alert("Numéro d'adhérent vide");
             return;
         }
@@ -235,7 +235,7 @@ class VueModif {
         vueModif.retour();
     }
 
-    supprimer(): void {
+    supprimer(): void { //supprime l'abonnement selectionné
         console.log("supprimer");
 		if (this.idSelect !== '') {
 			alert(`Supprimer l’abonnement n°${this.idSelect} ?`);
@@ -245,7 +245,7 @@ class VueModif {
         vueModif.update();
 	}
 
-    update(): void {
+    update(): void { //met à jour le montant total
         let tot = 0;
         for (let i = 0; i < this.form.table_abo.rows.length; i++) {
             const row = this.form.table_abo.rows[i];
@@ -255,16 +255,11 @@ class VueModif {
         this.form.total.textContent = tot.toString();
     }
 
-    modifier(): void {
+    modifier(): void { //affiche la zone de modif l'abonnement
         if (this.idSelect !== '') {
             vueModif.affich(this.noLigne, 1);
             console.log("modifier");
         }
-    }
-
-    ajouter(): void {
-        console.log("ajouter");
-        vueModif.affich(this.noLigne, 2);
     }
 }
 

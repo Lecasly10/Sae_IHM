@@ -10,7 +10,7 @@ type TMainForm = {
 	abonnement_theme		: HTMLInputElement,
 }
 
-interface UneSalle { // a quoi ca sert ?
+interface UneSalle { // à enlever
 	num: number;
 	date: string;
 	Adherent: string;
@@ -55,13 +55,13 @@ class Vue {
 		
 
 		/*
-		this._dataAbo = [
+		this._dataAbo = [ //tableau de test représente les données nécesseaires pour remplir le tableau
 			{ num: 101, date: "2023-01-01", Adherent: "Jean Dupont", CSP: "Actif", Adhésion: 3, Montant: 100 },
 			{ num: 202, date: "2023-01-01", Adherent: "Jean Dupont", CSP: "Actif", Adhésion: 2, Montant: 100 },
 			{ num: 303, date: "2023-01-01", Adherent: "Jean Dupont", CSP: "Actif", Adhésion: 5, Montant: 100 }
 		];
 		
-		for (let uneSalle of this._dataAbo) {
+		for (let uneSalle of this._dataAbo) { //remplit le tableau avec les données dans dataAbo
 			const tr = this.form.tableAbonnement.insertRow();
 			tr.insertCell().textContent = uneSalle.num.toString();
 			tr.insertCell().textContent = uneSalle.date;
@@ -76,25 +76,25 @@ class Vue {
 		// Gestion des boutons
 		this.form.btnAjouter.onclick = () => window.location.href = '../vue/creation.html';
 	
-		this.form.btnModifier.onclick = () => {
-			if (this.idSelect !== '') {
-				window.location.href = '../vue/modification.html';
-			}
-		};
+		this.form.btnDetail.onclick = () => { vue.modifier(this.noLigne); } // redirige vers la page modification.html;
 	
-		this.form.btnDetail.onclick = () => {
-			vue.detail(this.noLigne);
-		};
+		this.form.btnDetail.onclick = () => { vue.detail(this.noLigne); } // redirige vers la page detail.html;
 		
 	
-		this.form.btnSupprimer.onclick = () => function():void { vue.supprimerLigne();}
+		this.form.btnSupprimer.onclick = () => function():void { vue.supprimerLigne();} //supprime la ligne selectionnée
+	}
+
+	modifier(index:number): void {
+		if (this.idSelect !== '')
+			window.location.href = "../vue/modification.html?index=" + encodeURIComponent(index.toString()); // redirige vers la page modification.html
 	}
 
 	detail(index:number): void {
 		if (this.idSelect !== '')
-			window.location.href = "../vue/detail.html?index=" + encodeURIComponent(index.toString());
+			window.location.href = "../vue/detail.html?index=" + encodeURIComponent(index.toString()); // redirige vers la page detail.html
 	}
-	supprimerLigne(): void {
+
+	supprimerLigne(): void { //supprime la ligne selectionnée
 		if (this.idSelect !== '') {
 			alert(`Supprimer l’abonnement n°${this.idSelect} ?`);
 			this.form.tableAbonnement.deleteRow(this.noLigne);
@@ -102,7 +102,7 @@ class Vue {
 		}
 	}
 
-	selectionLigne(noLigne: number, id: string): void {
+	selectionLigne(noLigne: number, id: string): void { //selectionne et colorie la ligne
 		if (this.idSelect !== '') {	
 			this.form.tableAbonnement.rows[this.noLigne].style.backgroundColor = '#ffffff'; // +1 à cause du thead
 		}
