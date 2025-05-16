@@ -71,11 +71,32 @@ class LesAdhérents{
             return T;
         }
 
-        //delete 
+        delete(adherent : UnAdhérent):boolean
+        {
+            // requête de suppression d’un abonnement dans la table
+            let sql : string;
+            sql = "DELETE FROM adherent WHERE adh_num = ?";
+            // requête de manipulation : utiliser SQLexec
+            return APIsql.sqlWeb.SQLexec(sql,[adherent.numAdhé.toString()]);
+        }
 
-        //insert
+        insert(adherent : UnAdhérent):boolean
+        {
+            // requête d’insertion d’un abonnement dans la table
+            let sql : string;
+            sql = "INSERT INTO adherent (adh_num, adh_civ, adh_nom, adh_prenom, adh_adr, adh_cp, adh_ville, adh_mel, csp_num) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            // requête de manipulation : utiliser SQLexec
+            return APIsql.sqlWeb.SQLexec(sql,[adherent.numAdhé.toString(), adherent._adh_civAdhé,, adherent.nomAdhé, adherent._adh_adrAdhé, adherent.csp_numAdhé.toString(), adherent._adh_cpAdhé.toString(),adherent._adh_melAdhé, adherent._adh_villeAdhé , adherent.prenomAdhé]);
+        }
 
-        //update
+        update(adherent : UnAdhérent):boolean
+        {
+            // requête de mise à jour d’un abonnement dans la table
+            let sql : string;
+            sql = "UPDATE adherent SET adh_num = ?, adh_civ = ?, adh_nom = ?, adh_prenom = ?, adh_adr = ?, adh_cp = ?, adh_ville = ?, adh_mel = ?, csp_num = ? WHERE adh_num = ?";
+            // requête de manipulation : utiliser SQLexec
+            return APIsql.sqlWeb.SQLexec(sql,[adherent.numAdhé.toString(), adherent._adh_civAdhé,, adherent.nomAdhé, adherent._adh_adrAdhé, adherent.csp_numAdhé.toString(), adherent._adh_cpAdhé.toString(),adherent._adh_melAdhé, adherent._adh_villeAdhé , adherent.prenomAdhé]);
+        }
 
         //getNombreAdhesions
 }
