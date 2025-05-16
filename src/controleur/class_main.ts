@@ -60,7 +60,7 @@ class Vue {
 			{ num: 202, date: "2023-01-01", Adherent: "Jean Dupont", CSP: "Actif", Adhésion: 2, Montant: 100 },
 			{ num: 303, date: "2023-01-01", Adherent: "Jean Dupont", CSP: "Actif", Adhésion: 5, Montant: 100 }
 		];
-		*/
+		
 		for (let uneSalle of this._dataAbo) {
 			const tr = this.form.tableAbonnement.insertRow();
 			tr.insertCell().textContent = uneSalle.num.toString();
@@ -72,7 +72,7 @@ class Vue {
 		
 			tr.onclick = () => this.selectionLigne(tr.rowIndex, uneSalle.num.toString());
 		}
-	
+		*/
 		// Gestion des boutons
 		this.form.btnAjouter.onclick = () => window.location.href = '../vue/creation.html';
 	
