@@ -45,6 +45,17 @@ class UnAdhérent
         this._adh_nom = _adh_nom;
     }
 
+    set prenomAdhé(_adh_prenom: string) {
+        if (_adh_prenom.length > 50) {
+            throw new Error("Le _adh_prenom ne peut pas dépasser 50 caractères");
+        }
+        else this._adh_prenom = _adh_prenom;
+    }
+
+    get prenomAdhé(): string {
+        return this._adh_prenom;
+    }
+
     get _adh_civAdhé(): string {
         return this._adh_civ;
     }

@@ -33,10 +33,10 @@ class LesCSP {
             return this.load(APIsql.sqlWeb.SQLloadData(this.prepare(""),[]));
         }
 
-    byNum(num: string): UnCSP
+    byNum(num: number): UnCSP
     {
         let csp = new UnCSP;
-        const cps: TCSP = this.load(APIsql.sqlWeb.SQLloadData(this.prepare("csp_num = ?"), [num]));
+        const cps: TCSP = this.load(APIsql.sqlWeb.SQLloadData(this.prepare("csp_num = ?"), [num.toString()]));
         const LesCles : string[] = Object.keys(cps);
         if (LesCles.length > 0) {
             csp = cps[LesCles[0]];
@@ -60,4 +60,4 @@ class LesCSP {
 }
 type TCSP = {[key: string]: UnCSP};
 
-export{ connexion, UnCSP, LesCSP, TCSP};
+export{ connexion, LesCSP, TCSP};

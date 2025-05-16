@@ -99,4 +99,4 @@ class UneAdhésionAbon {
 
 const UneAdhésionAbons = new UneAdhésionAbon();
 
-export {connexion, LesAdhésions, UneAdhésionAbon, UneAdhésionAbons};
+export {connexion, LesAdhésions, UneAdhésionAbon, UneAdhésionAbons, lesAdhésions};

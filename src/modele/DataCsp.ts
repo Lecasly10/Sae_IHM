@@ -51,4 +51,4 @@ class UnCSP {
 
 
 
-export{ connexion, UnCSP, LesCSP };
+export{ connexion, UnCSP };
